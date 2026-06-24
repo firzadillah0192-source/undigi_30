@@ -1018,15 +1018,63 @@ export async function init() {
   showSkeletons();
   initShareButtons();
 
+  // Setup 'Buka Undangan' button click handler early
+  const btnOpen = document.getElementById("btn-open-invitation");
+  if (btnOpen) {
+    btnOpen.addEventListener("click", () => {
+      // Callback after animation completes or is skipped
+      const onComplete = () => {
+        // 1. Dispatch custom event for music.js to play audio (Req 13.2)
+        document.dispatchEvent(new CustomEvent("animations:complete"));
+        // 2. Initialize scroll entrance animations for sections (Req 2.2, 14.4)
+        if (window.WeddingAnimations && typeof window.WeddingAnimations.initScrollAnimations === "function") {
+          window.WeddingAnimations.initScrollAnimations();
+        }
+        // 3. Initialize background particles (Req 14.5)
+        if (typeof window.initParticles === "function") {
+          window.initParticles();
+        }
+      };
+
+      // Play envelope opening animation (Req 1.2)
+      if (window.WeddingAnimations && typeof window.WeddingAnimations.playOpeningAnimation === "function") {
+        window.WeddingAnimations.playOpeningAnimation(onComplete);
+        // Setup skip button/interaction listeners (Req 1.7)
+        if (typeof window.WeddingAnimations.setupSkipListeners === "function") {
+          window.WeddingAnimations.setupSkipListeners(onComplete);
+        }
+      } else {
+        // Fallback if animations script failed to load
+        onComplete();
+        const firstSection = document.querySelector(".section:not(#cover)") || document.getElementById("bismillah");
+        if (firstSection) {
+          firstSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+    });
+  }
+
   const data = await fetchContent();
 
   if (!data) {
     // Tidak ada data sama sekali — sembunyikan skeleton, tampilkan konten default
     hideSkeletons();
+    
+    // Reveal cover content so the user can interact even with fallback defaults
+    const coverContent = document.querySelector(".cover-content");
+    if (coverContent) {
+      coverContent.classList.add("is-visible");
+    }
     return;
   }
 
   renderAll(data, guestName);
+
+  // Reveal cover content (names, date, guest greeting, button) on load (Req 1.1)
+  const coverContent = document.querySelector(".cover-content");
+  if (coverContent) {
+    coverContent.classList.add("is-visible");
+  }
 }
 
 // ---------------------------------------------------------------------------
