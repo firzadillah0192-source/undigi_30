@@ -1065,6 +1065,11 @@ export async function init() {
     if (coverContent) {
       coverContent.classList.add("is-visible");
     }
+
+    // Initialize scroll entrance animations for fallback sections on load (Req 2.2, 14.4)
+    if (window.WeddingAnimations && typeof window.WeddingAnimations.initScrollAnimations === "function") {
+      window.WeddingAnimations.initScrollAnimations();
+    }
     return;
   }
 
@@ -1074,6 +1079,11 @@ export async function init() {
   const coverContent = document.querySelector(".cover-content");
   if (coverContent) {
     coverContent.classList.add("is-visible");
+  }
+
+  // Initialize scroll entrance animations for sections on load (Req 2.2, 14.4)
+  if (window.WeddingAnimations && typeof window.WeddingAnimations.initScrollAnimations === "function") {
+    window.WeddingAnimations.initScrollAnimations();
   }
 }
 
