@@ -1,0 +1,27 @@
+{
+    "name": "wedding/invitation",
+    "description": "Website Undangan Digital Pernikahan",
+    "type": "project",
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0",
+        "giorgiosironi/eris": "^0.13"
+    },
+    "autoload": {
+        "psr-4": {
+            "Wedding\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Wedding\\Tests\\": "tests/php/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "minimum-stability": "stable"
+}

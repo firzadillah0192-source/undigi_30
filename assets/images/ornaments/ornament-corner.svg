@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" aria-hidden="true" role="img">
+  <title>Corner Batik Floral Ornament</title>
+  <defs>
+    <radialGradient id="petalGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#C9A84C" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#8B6914" stop-opacity="0.6"/>
+    </radialGradient>
+    <radialGradient id="leafGrad" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#4A7C59"/>
+      <stop offset="100%" stop-color="#2D5016"/>
+    </radialGradient>
+    <radialGradient id="flowerGrad" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#C9A84C"/>
+      <stop offset="50%" stop-color="#A07830"/>
+      <stop offset="100%" stop-color="#2D5016"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Outer corner frame lines -->
+  <path d="M 8,8 L 60,8" stroke="#C9A84C" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M 8,8 L 8,60" stroke="#C9A84C" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M 14,14 L 50,14" stroke="#C9A84C" stroke-width="0.7" fill="none" stroke-linecap="round" stroke-dasharray="2,3"/>
+  <path d="M 14,14 L 14,50" stroke="#C9A84C" stroke-width="0.7" fill="none" stroke-linecap="round" stroke-dasharray="2,3"/>
+
+  <!-- Corner diamond -->
+  <rect x="3" y="3" width="10" height="10" rx="1" fill="#C9A84C" transform="rotate(45 8 8)"/>
+  <rect x="4.5" y="4.5" width="7" height="7" rx="0.5" fill="none" stroke="#2D5016" stroke-width="0.8" transform="rotate(45 8 8)"/>
+
+  <!-- Main vine stem from corner -->
+  <path d="M 8,60 Q 12,80 8,100 Q 4,130 18,150 Q 30,168 50,175 Q 75,185 100,180" 
+        stroke="#2D5016" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M 60,8 Q 80,12 100,8 Q 130,4 150,18 Q 168,30 175,50 Q 185,75 180,100" 
+        stroke="#2D5016" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+  <!-- Secondary vines -->
+  <path d="M 12,75 Q 25,65 35,72" stroke="#4A7C59" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <path d="M 10,100 Q 30,88 42,96" stroke="#4A7C59" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <path d="M 16,128 Q 35,115 50,122" stroke="#4A7C59" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <path d="M 75,12 Q 65,25 72,35" stroke="#4A7C59" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <path d="M 100,10 Q 88,30 96,42" stroke="#4A7C59" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <path d="M 128,16 Q 115,35 122,50" stroke="#4A7C59" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+
+  <!-- Leaf cluster at vine along left edge -->
+  <!-- Leaf 1 -->
+  <ellipse cx="35" cy="70" rx="10" ry="5" fill="url(#leafGrad)" transform="rotate(-30 35 70)"/>
+  <line x1="35" y1="70" x2="40" y2="67" stroke="#87A878" stroke-width="0.5"/>
+  <!-- Leaf 2 -->
+  <ellipse cx="42" cy="94" rx="11" ry="5" fill="url(#leafGrad)" transform="rotate(-40 42 94)"/>
+  <line x1="42" y1="94" x2="46" y2="90" stroke="#87A878" stroke-width="0.5"/>
+  <!-- Leaf 3 -->
+  <ellipse cx="48" cy="120" rx="10" ry="4.5" fill="#4A7C59" opacity="0.85" transform="rotate(-20 48 120)"/>
+
+  <!-- Leaf cluster along top edge -->
+  <ellipse cx="70" cy="35" rx="10" ry="5" fill="url(#leafGrad)" transform="rotate(60 70 35)"/>
+  <line x1="70" y1="35" x2="67" y2="40" stroke="#87A878" stroke-width="0.5"/>
+  <ellipse cx="94" cy="42" rx="11" ry="5" fill="url(#leafGrad)" transform="rotate(50 94 42)"/>
+  <line x1="94" y1="42" x2="90" y2="46" stroke="#87A878" stroke-width="0.5"/>
+  <ellipse cx="120" cy="48" rx="10" ry="4.5" fill="#4A7C59" opacity="0.85" transform="rotate(70 120 48)"/>
+
+  <!-- Center corner flower (main focus) -->
+  <!-- Petals outer ring -->
+  <ellipse cx="38" cy="38" rx="8" ry="14" fill="#C9A84C" opacity="0.7" transform="rotate(0 38 38)"/>
+  <ellipse cx="38" cy="38" rx="8" ry="14" fill="#C9A84C" opacity="0.7" transform="rotate(45 38 38)"/>
+  <ellipse cx="38" cy="38" rx="8" ry="14" fill="#C9A84C" opacity="0.7" transform="rotate(90 38 38)"/>
+  <ellipse cx="38" cy="38" rx="8" ry="14" fill="#C9A84C" opacity="0.7" transform="rotate(135 38 38)"/>
+  <!-- Inner petals -->
+  <ellipse cx="38" cy="38" rx="5" ry="10" fill="#2D5016" opacity="0.85" transform="rotate(22.5 38 38)"/>
+  <ellipse cx="38" cy="38" rx="5" ry="10" fill="#2D5016" opacity="0.85" transform="rotate(67.5 38 38)"/>
+  <ellipse cx="38" cy="38" rx="5" ry="10" fill="#2D5016" opacity="0.85" transform="rotate(112.5 38 38)"/>
+  <ellipse cx="38" cy="38" rx="5" ry="10" fill="#2D5016" opacity="0.85" transform="rotate(157.5 38 38)"/>
+  <!-- Flower center -->
+  <circle cx="38" cy="38" r="7" fill="url(#petalGrad)"/>
+  <circle cx="38" cy="38" r="4" fill="#2D5016"/>
+  <circle cx="38" cy="38" r="2" fill="#C9A84C"/>
+  <!-- Pollen dots -->
+  <circle cx="35" cy="35" r="0.8" fill="#FAF7F0"/>
+  <circle cx="41" cy="35" r="0.8" fill="#FAF7F0"/>
+  <circle cx="38" cy="33" r="0.8" fill="#FAF7F0"/>
+  <circle cx="38" cy="43" r="0.8" fill="#FAF7F0"/>
+  <circle cx="35" cy="41" r="0.8" fill="#FAF7F0"/>
+  <circle cx="41" cy="41" r="0.8" fill="#FAF7F0"/>
+
+  <!-- Small bud on left vine -->
+  <circle cx="18" cy="150" r="5" fill="#4A7C59"/>
+  <ellipse cx="18" cy="150" rx="3" ry="5" fill="#C9A84C" opacity="0.8" transform="rotate(15 18 150)"/>
+  <ellipse cx="18" cy="150" rx="3" ry="5" fill="#C9A84C" opacity="0.8" transform="rotate(-15 18 150)"/>
+  <circle cx="18" cy="150" r="2.5" fill="#2D5016"/>
+
+  <!-- Small bud on top vine -->
+  <circle cx="150" cy="18" r="5" fill="#4A7C59"/>
+  <ellipse cx="150" cy="18" rx="3" ry="5" fill="#C9A84C" opacity="0.8" transform="rotate(75 150 18)"/>
+  <ellipse cx="150" cy="18" rx="3" ry="5" fill="#C9A84C" opacity="0.8" transform="rotate(105 150 18)"/>
+  <circle cx="150" cy="18" r="2.5" fill="#2D5016"/>
+
+  <!-- Batik geometric fill — tiny diamonds scattered -->
+  <g fill="#C9A84C" opacity="0.4">
+    <rect x="22" y="108" width="4" height="4" transform="rotate(45 24 110)"/>
+    <rect x="55" y="55" width="3" height="3" transform="rotate(45 56.5 56.5)"/>
+    <rect x="108" y="22" width="4" height="4" transform="rotate(45 110 24)"/>
+    <rect x="160" y="60" width="3" height="3" transform="rotate(45 161.5 61.5)"/>
+    <rect x="60" y="160" width="3" height="3" transform="rotate(45 61.5 161.5)"/>
+  </g>
+
+  <!-- Scrollwork flourish curls near corner -->
+  <path d="M 50,10 Q 55,18 48,22 Q 42,26 45,32" stroke="#C9A84C" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <path d="M 10,50 Q 18,55 22,48 Q 26,42 32,45" stroke="#C9A84C" stroke-width="1" fill="none" stroke-linecap="round"/>
+
+  <!-- End leaf spray bottom -->
+  <path d="M 80,175 Q 90,168 95,172 Q 100,176 105,170" stroke="#4A7C59" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <ellipse cx="82" cy="173" rx="7" ry="3.5" fill="#2D5016" opacity="0.7" transform="rotate(-15 82 173)"/>
+  <ellipse cx="95" cy="171" rx="7" ry="3.5" fill="#4A7C59" opacity="0.7" transform="rotate(5 95 171)"/>
+
+  <!-- End leaf spray right -->
+  <path d="M 175,80 Q 168,90 172,95 Q 176,100 170,105" stroke="#4A7C59" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <ellipse cx="173" cy="82" rx="3.5" ry="7" fill="#2D5016" opacity="0.7" transform="rotate(-75 173 82)"/>
+  <ellipse cx="171" cy="95" rx="3.5" ry="7" fill="#4A7C59" opacity="0.7" transform="rotate(-85 171 95)"/>
+</svg>

@@ -1,0 +1,64 @@
+# Example Nginx server block for Digital Wedding Invitation.
+# Replace example.com, root path, and PHP-FPM socket/version for your VPS.
+
+server {
+    listen 80;
+    server_name example.com www.example.com;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name example.com www.example.com;
+
+    root /var/www/wedding-invitation;
+    index index.html;
+
+    # ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
+    # ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+    gzip on;
+    gzip_types text/plain text/css text/html application/javascript application/json image/svg+xml;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    location ^~ /api/ {
+        try_files $uri /api/index.php?$query_string;
+    }
+
+    location = /api {
+        rewrite ^ /api/index.php last;
+    }
+
+    location ~ ^/api/index\.php$ {
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
+    }
+
+    location ~ \.php$ {
+        return 403;
+    }
+
+    location ~ ^/(data|includes)/ {
+        deny all;
+        return 403;
+    }
+
+    location ~ /\. {
+        deny all;
+    }
+
+    location ~* \.(?:css|js|jpg|jpeg|png|webp|gif|svg|mp3|ogg)$ {
+        expires 30d;
+        add_header Cache-Control "public, immutable";
+        try_files $uri =404;
+    }
+}

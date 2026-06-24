@@ -1,0 +1,512 @@
+/**
+ * animations.css
+ * CSS Keyframes & Animation Utilities — Digital Wedding Invitation
+ *
+ * Sistem animasi ini bekerja bersama GSAP + ScrollTrigger (guest.js).
+ * - Keyframes CSS digunakan untuk efek dekoratif (partikel, ornamen, pulse)
+ * - Class [data-animate] menetapkan state awal elemen sebelum GSAP mengambil alih
+ * - Transition untuk hover state tombol dan kartu tanpa JS
+ *
+ * Palet warna:
+ *   --color-hijau-tua  : #2D5016
+ *   --color-emas       : #C9A84C
+ *   --color-cream      : #FAF7F0
+ *
+ * Requirements: 14.4, 14.5
+ */
+
+/* ============================================================
+   1. CSS Custom Properties (lokal, suplemen dari guest.css)
+   ============================================================ */
+
+:root {
+  /* Durasi dasar — sesuai Requirement 14.4: 200ms–600ms */
+  --anim-duration-fast   : 200ms;
+  --anim-duration-base   : 400ms;
+  --anim-duration-slow   : 600ms;
+
+  /* Easing standar */
+  --ease-out-quart : cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out    : cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Warna (digunakan di keyframes) */
+  --color-emas     : #C9A84C;
+  --color-hijau-tua: #2D5016;
+  --color-cream    : #FAF7F0;
+}
+
+
+/* ============================================================
+   2. Keyframe Definitions
+   ============================================================ */
+
+/**
+ * fadeInUp
+ * Digunakan oleh GSAP ScrollTrigger via [data-animate].
+ * Tersedia juga sebagai animasi CSS murni untuk elemen statis.
+ * Durasi default: 500ms — masuk dalam rentang 200ms–600ms (Req. 14.4)
+ */
+@keyframes fadeInUp {
+  from {
+    opacity  : 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity  : 1;
+    transform: translateY(0);
+  }
+}
+
+/**
+ * fadeIn
+ * Fade sederhana tanpa pergerakan posisi.
+ * Dipakai untuk overlay, modal, dan teks Bismillah (Req. 2.2).
+ */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/**
+ * scaleIn
+ * Muncul dari skala kecil ke normal — dipakai untuk kartu profil,
+ * badge, dan elemen ornamen kecil.
+ */
+@keyframes scaleIn {
+  from {
+    opacity  : 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity  : 1;
+    transform: scale(1);
+  }
+}
+
+/**
+ * petalsFloat
+ * Animasi melayang untuk efek partikel kelopak bunga / butiran emas.
+ * Bergerak dari bawah ke atas sambil sedikit berayun horizontal
+ * untuk kesan alami. CLS-safe karena berjalan di canvas/pseudo-element
+ * yang tidak mempengaruhi layout (Req. 14.5).
+ */
+@keyframes petalsFloat {
+  0% {
+    opacity  : 0;
+    transform: translateY(100vh) translateX(0) rotate(0deg);
+  }
+  10% {
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(50vh) translateX(20px) rotate(180deg);
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity  : 0;
+    transform: translateY(-10vh) translateX(-10px) rotate(360deg);
+  }
+}
+
+/**
+ * pulseGold
+ * Denyutan halus warna emas — dipakai untuk ornamen divider, ikon
+ * bintang, dan elemen aksen pada cover & footer.
+ * Menggunakan opacity + scale agar tidak memicu layout reflow.
+ */
+@keyframes pulseGold {
+  0%, 100% {
+    opacity  : 1;
+    transform: scale(1);
+    filter   : drop-shadow(0 0 0px var(--color-emas));
+  }
+  50% {
+    opacity  : 0.75;
+    transform: scale(1.08);
+    filter   : drop-shadow(0 0 6px var(--color-emas));
+  }
+}
+
+
+/* ============================================================
+   3. Utility Classes — Animasi CSS Murni
+   ============================================================ */
+
+/**
+ * .animate-fade-in-up
+ * Gunakan saat JS tidak tersedia atau sebagai fallback GSAP.
+ */
+.animate-fade-in-up {
+  animation: fadeInUp var(--anim-duration-base) var(--ease-out-quart) both;
+}
+
+.animate-fade-in {
+  animation: fadeIn var(--anim-duration-base) var(--ease-out-quart) both;
+}
+
+.animate-scale-in {
+  animation: scaleIn var(--anim-duration-base) var(--ease-out-quart) both;
+}
+
+/** Variasi durasi melalui modifier class */
+.animate--fast { animation-duration: var(--anim-duration-fast); }
+.animate--slow { animation-duration: var(--anim-duration-slow); }
+
+/** Stagger delay helpers (untuk children tanpa JS) */
+.animate-delay-1 { animation-delay: 100ms; }
+.animate-delay-2 { animation-delay: 200ms; }
+.animate-delay-3 { animation-delay: 300ms; }
+.animate-delay-4 { animation-delay: 400ms; }
+.animate-delay-5 { animation-delay: 500ms; }
+
+/** Pastikan elemen dengan delay tidak terlihat sebelum animasi mulai */
+.animate-delay-1,
+.animate-delay-2,
+.animate-delay-3,
+.animate-delay-4,
+.animate-delay-5 {
+  animation-fill-mode: both;
+}
+
+/**
+ * .animate-pulse-gold
+ * Denyutan emas — pakai di ornamen SVG, divider, ikon bintang.
+ */
+.animate-pulse-gold {
+  animation: pulseGold 2.4s var(--ease-in-out) infinite;
+}
+
+/**
+ * .animate-petals-float
+ * Tambahkan ke partikel kelopak bunga yang dirender via JS/canvas.
+ */
+.animate-petals-float {
+  animation: petalsFloat 8s linear infinite;
+  pointer-events: none; /* tidak mengganggu klik pengguna */
+  will-change: transform, opacity; /* hint GPU — CLS aman */
+}
+
+
+/* ============================================================
+   4. [data-animate] — Initial State untuk GSAP ScrollTrigger
+   ============================================================
+   Semua elemen bertanda [data-animate] dimulai dari state
+   "tersembunyi + sedikit di bawah". GSAP ScrollTrigger akan
+   menganimasikan ke opacity: 1 dan translateY(0) saat elemen
+   masuk viewport (lihat initScrollAnimations() di guest.js).
+
+   Penting: state ini HARUS ada sebelum GSAP init agar tidak ada
+   "flash of unstyled content" (FOUC) saat halaman pertama dimuat.
+   ============================================================ */
+
+[data-animate] {
+  opacity  : 0;
+  transform: translateY(30px);
+}
+
+/**
+ * Reduced motion — hormati preferensi aksesibilitas pengguna.
+ * Elemen langsung tampil tanpa animasi jika OS mengaktifkan
+ * prefers-reduced-motion (WCAG 2.1 Success Criterion 2.3.3).
+ */
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] {
+    opacity  : 1;
+    transform: none;
+  }
+
+  .animate-fade-in-up,
+  .animate-fade-in,
+  .animate-scale-in,
+  .animate-pulse-gold,
+  .animate-petals-float {
+    animation: none;
+  }
+}
+
+
+/* ============================================================
+   5. Hover Transitions — Tombol
+   ============================================================
+   CSS transition untuk semua state hover tombol.
+   Tidak bergantung pada JS, memberikan feedback visual instan.
+   ============================================================ */
+
+/* Tombol Primer (Buka Undangan, Simpan Kalender, dll.) */
+.btn-primary {
+  display         : inline-flex;
+  align-items     : center;
+  justify-content : center;
+  gap             : 0.5rem;
+  padding         : 0.75rem 1.75rem;
+  background-color: var(--color-hijau-tua);
+  color           : var(--color-cream);
+  border          : 2px solid transparent;
+  border-radius   : 0.375rem;
+  font-family     : var(--font-sans, 'Inter', system-ui, sans-serif);
+  font-weight     : 600;
+  font-size       : 0.9375rem;
+  text-decoration : none;
+  cursor          : pointer;
+
+  /* Transition properti yang relevan saja — hindari "all" */
+  transition:
+    background-color var(--anim-duration-fast) var(--ease-out-quart),
+    border-color     var(--anim-duration-fast) var(--ease-out-quart),
+    color            var(--anim-duration-fast) var(--ease-out-quart),
+    box-shadow       var(--anim-duration-fast) var(--ease-out-quart),
+    transform        var(--anim-duration-fast) var(--ease-out-quart);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background-color: #3d6b1f; /* sedikit lebih terang dari hijau-tua */
+  box-shadow      : 0 4px 16px rgba(45, 80, 22, 0.35);
+  transform       : translateY(-2px);
+  outline         : none;
+}
+
+.btn-primary:active {
+  transform : translateY(0);
+  box-shadow: 0 2px 6px rgba(45, 80, 22, 0.25);
+}
+
+/* Tombol Sekunder / Ghost */
+.btn-secondary {
+  display         : inline-flex;
+  align-items     : center;
+  justify-content : center;
+  gap             : 0.5rem;
+  padding         : 0.75rem 1.75rem;
+  background-color: transparent;
+  color           : var(--color-hijau-tua);
+  border          : 2px solid var(--color-hijau-tua);
+  border-radius   : 0.375rem;
+  font-family     : var(--font-sans, 'Inter', system-ui, sans-serif);
+  font-weight     : 600;
+  font-size       : 0.9375rem;
+  text-decoration : none;
+  cursor          : pointer;
+
+  transition:
+    background-color var(--anim-duration-fast) var(--ease-out-quart),
+    color            var(--anim-duration-fast) var(--ease-out-quart),
+    box-shadow       var(--anim-duration-fast) var(--ease-out-quart),
+    transform        var(--anim-duration-fast) var(--ease-out-quart);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus-visible {
+  background-color: var(--color-hijau-tua);
+  color           : var(--color-cream);
+  box-shadow      : 0 4px 16px rgba(45, 80, 22, 0.25);
+  transform       : translateY(-2px);
+  outline         : none;
+}
+
+.btn-secondary:active {
+  transform : translateY(0);
+  box-shadow: none;
+}
+
+/* Tombol Emas (CTA cover, tombol bagikan) */
+.btn-gold {
+  display         : inline-flex;
+  align-items     : center;
+  justify-content : center;
+  gap             : 0.5rem;
+  padding         : 0.875rem 2rem;
+  background-color: var(--color-emas);
+  color           : #1a0f00;
+  border          : 2px solid transparent;
+  border-radius   : 0.375rem;
+  font-family     : var(--font-sans, 'Inter', system-ui, sans-serif);
+  font-weight     : 700;
+  font-size       : 1rem;
+  letter-spacing  : 0.04em;
+  text-decoration : none;
+  cursor          : pointer;
+
+  transition:
+    background-color var(--anim-duration-fast) var(--ease-out-quart),
+    box-shadow       var(--anim-duration-fast) var(--ease-out-quart),
+    transform        var(--anim-duration-fast) var(--ease-out-quart);
+}
+
+.btn-gold:hover,
+.btn-gold:focus-visible {
+  background-color: #d4b55a;
+  box-shadow      : 0 4px 20px rgba(201, 168, 76, 0.5);
+  transform       : translateY(-2px);
+  outline         : none;
+}
+
+.btn-gold:active {
+  transform : translateY(0);
+  box-shadow: 0 2px 8px rgba(201, 168, 76, 0.35);
+}
+
+/* Tombol ikon (musik, salin rekening) */
+.btn-icon {
+  display         : inline-flex;
+  align-items     : center;
+  justify-content : center;
+  width           : 2.5rem;
+  height          : 2.5rem;
+  background-color: transparent;
+  color           : var(--color-hijau-tua);
+  border          : 1.5px solid currentColor;
+  border-radius   : 50%;
+  cursor          : pointer;
+  padding         : 0;
+
+  transition:
+    background-color var(--anim-duration-fast) var(--ease-out-quart),
+    color            var(--anim-duration-fast) var(--ease-out-quart),
+    transform        var(--anim-duration-fast) var(--ease-out-quart),
+    box-shadow       var(--anim-duration-fast) var(--ease-out-quart);
+}
+
+.btn-icon:hover,
+.btn-icon:focus-visible {
+  background-color: var(--color-hijau-tua);
+  color           : var(--color-cream);
+  box-shadow      : 0 2px 10px rgba(45, 80, 22, 0.3);
+  transform       : scale(1.1);
+  outline         : none;
+}
+
+.btn-icon:active {
+  transform: scale(0.95);
+}
+
+/* State disabled untuk semua tombol */
+.btn-primary:disabled,
+.btn-secondary:disabled,
+.btn-gold:disabled,
+.btn-icon:disabled {
+  opacity       : 0.45;
+  cursor        : not-allowed;
+  pointer-events: none;
+  transform     : none;
+  box-shadow    : none;
+}
+
+
+/* ============================================================
+   6. Hover Transitions — Kartu
+   ============================================================ */
+
+/* Kartu umum (profil mempelai, acara, love story) */
+.card {
+  background-color: #ffffff;
+  border-radius   : 0.75rem;
+  overflow        : hidden;
+  box-shadow      : 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  transition:
+    box-shadow var(--anim-duration-base) var(--ease-out-quart),
+    transform  var(--anim-duration-base) var(--ease-out-quart);
+}
+
+.card:hover {
+  box-shadow: 0 8px 28px rgba(45, 80, 22, 0.15);
+  transform : translateY(-4px);
+}
+
+/* Kartu galeri foto */
+.gallery-item {
+  border-radius: 0.5rem;
+  overflow     : hidden;
+  cursor       : pointer;
+
+  transition:
+    box-shadow var(--anim-duration-fast) var(--ease-out-quart),
+    transform  var(--anim-duration-fast) var(--ease-out-quart);
+}
+
+.gallery-item:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transform : scale(1.03);
+}
+
+/* Kartu rekening amplop digital */
+.envelope-card {
+  background    : linear-gradient(135deg, var(--color-hijau-tua) 0%, #3d6b1f 100%);
+  border-radius : 0.75rem;
+  color         : var(--color-cream);
+  padding       : 1.5rem;
+  position      : relative;
+  overflow      : hidden;
+
+  transition:
+    box-shadow var(--anim-duration-base) var(--ease-out-quart),
+    transform  var(--anim-duration-base) var(--ease-out-quart);
+}
+
+.envelope-card:hover {
+  box-shadow: 0 10px 32px rgba(45, 80, 22, 0.4);
+  transform : translateY(-3px);
+}
+
+/* Kartu timeline love story */
+.timeline-item {
+  position: relative;
+
+  transition:
+    transform var(--anim-duration-base) var(--ease-out-quart);
+}
+
+.timeline-item:hover {
+  transform: translateX(4px);
+}
+
+/* Kartu ucapan buku tamu */
+.guestbook-entry {
+  background-color: #ffffff;
+  border-left     : 3px solid var(--color-emas);
+  border-radius   : 0.5rem;
+  padding         : 1rem 1.25rem;
+  box-shadow      : 0 1px 4px rgba(0, 0, 0, 0.06);
+
+  transition:
+    box-shadow var(--anim-duration-fast) var(--ease-out-quart),
+    border-color var(--anim-duration-fast) var(--ease-out-quart);
+}
+
+.guestbook-entry:hover {
+  box-shadow  : 0 4px 14px rgba(201, 168, 76, 0.2);
+  border-color: var(--color-hijau-tua);
+}
+
+
+/* ============================================================
+   7. Reduced Motion — Override untuk Hover Transitions
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary,
+  .btn-secondary,
+  .btn-gold,
+  .btn-icon,
+  .card,
+  .gallery-item,
+  .envelope-card,
+  .timeline-item,
+  .guestbook-entry {
+    transition: none;
+  }
+
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .btn-gold:hover,
+  .btn-icon:hover,
+  .card:hover,
+  .gallery-item:hover,
+  .envelope-card:hover,
+  .timeline-item:hover {
+    transform: none;
+  }
+}

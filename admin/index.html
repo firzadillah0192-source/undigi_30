@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Admin - Wedding</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    <!-- Header -->
+    <header class="admin-header">
+      <div style="display: flex; align-items: center;">
+        <button id="sidebar-toggle-btn" class="admin-nav-toggle" aria-label="Toggle Sidebar">
+          <i data-feather="menu"></i>
+        </button>
+        <span class="admin-header__brand">Wedding Admin</span>
+      </div>
+      <div class="admin-header__actions">
+        <a href="../index.html" target="_blank" class="btn btn--outline btn--sm" style="color: var(--color-white); border-color: var(--color-gold);">
+          <i data-feather="external-link"></i> Pratinjau
+        </a>
+        <button id="logout-btn" class="btn btn--danger btn--sm">
+          <i data-feather="log-out"></i> Keluar
+        </button>
+      </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <nav class="admin-nav">
+        <a href="index.html" class="admin-nav__item"><i data-feather="grid"></i> Dashboard</a>
+        <a href="couple.html" class="admin-nav__item"><i data-feather="users"></i> Mempelai</a>
+        <a href="events.html" class="admin-nav__item"><i data-feather="calendar"></i> Acara</a>
+        <a href="gallery.html" class="admin-nav__item"><i data-feather="image"></i> Galeri Foto</a>
+        <a href="love-story.html" class="admin-nav__item"><i data-feather="heart"></i> Love Story</a>
+        <a href="envelope.html" class="admin-nav__item"><i data-feather="credit-card"></i> Amplop Digital</a>
+        <a href="rsvp.html" class="admin-nav__item"><i data-feather="mail"></i> RSVP Tamu</a>
+        <a href="guestbook.html" class="admin-nav__item"><i data-feather="message-square"></i> Buku Tamu</a>
+        <a href="music.html" class="admin-nav__item"><i data-feather="music"></i> Musik Latar</a>
+        <a href="settings.html" class="admin-nav__item"><i data-feather="settings"></i> Pengaturan</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <div class="admin-page-header">
+        <h2 class="admin-page-title">Dashboard</h2>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-card__icon"><i data-feather="check-circle"></i></div>
+          <div>
+            <div class="stat-card__val" id="stat-rsvp-hadir">-</div>
+            <div class="stat-card__label">Tamu Hadir (RSVP)</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__icon" style="color: var(--color-danger);"><i data-feather="x-circle"></i></div>
+          <div>
+            <div class="stat-card__val" id="stat-rsvp-tidak-hadir">-</div>
+            <div class="stat-card__label">Tidak Hadir (RSVP)</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__icon" style="color: var(--color-gold);"><i data-feather="message-circle"></i></div>
+          <div>
+            <div class="stat-card__val" id="stat-guestbook-total">-</div>
+            <div class="stat-card__label">Total Ucapan Tamu</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="card-title">Selamat Datang di Panel Pengelolaan Undangan Digital</h3>
+        <p style="margin-bottom: 10px;">Melalui panel ini, Anda dapat memperbarui seluruh informasi terkait hari bahagia Anda secara real-time:</p>
+        <ul style="margin-left: 20px; line-height: 1.8;">
+          <li>Profil mempelai pria dan wanita beserta foto profil masing-masing.</li>
+          <li>Detail tempat, waktu, dan peta lokasi untuk acara Akad dan Resepsi.</li>
+          <li>Koleksi album foto pre-wedding pada galeri.</li>
+          <li>Perjalanan kisah cinta Anda berdua pada timeline.</li>
+          <li>Informasi bank atau e-wallet untuk kado digital.</li>
+          <li>Melihat konfirmasi kehadiran RSVP tamu dan moderasi buku tamu.</li>
+        </ul>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <script src="../assets/js/admin.js"></script>
+</body>
+</html>

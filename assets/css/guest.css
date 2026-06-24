@@ -1,0 +1,2093 @@
+/**
+ * guest.css
+ * Styling Utama Guest Page — Digital Wedding Invitation
+ * Tema: Modern Heritage (Hijau × Emas × Cream)
+ *
+ * Struktur file:
+ *  1. CSS Custom Properties (design tokens)
+ *  2. Reset & Base
+ *  3. Typography Utilities
+ *  4. Layout Utilities (section-inner, section-header, sr-only)
+ *  5. Skeleton Loaders
+ *  6. Music Toggle (fixed)
+ *  7. Section: Cover
+ *  8. Section: Bismillah
+ *  9. Section: Couple
+ * 10. Section: Events
+ * 11. Section: Countdown
+ * 12. Section: Gallery + Lightbox
+ * 13. Section: Love Story / Timeline
+ * 14. Section: Maps
+ * 15. Section: RSVP
+ * 16. Section: Guestbook
+ * 17. Section: Envelope (Amplop Digital)
+ * 18. Section: Footer / Share
+ * 19. Form Elements (shared)
+ * 20. Responsive Breakpoints
+ *
+ * Requirements: 1.6, 14.1, 14.2, 14.3, 14.6, 14.7
+ */
+
+/* ============================================================
+   1. CSS Custom Properties — Design Tokens
+   ============================================================ */
+
+:root {
+  /* --- Color Palette (Modern Heritage, 8 warna) --- */
+  --color-hijau-tua    : #2D5016;   /* Heading, tombol utama */
+  --color-hijau-medium : #4A7C59;   /* Aksen, border */
+  --color-sage         : #87A878;   /* Background section alt */
+  --color-hijau-muda   : #C8DDB0;   /* Hover state */
+  --color-cream        : #FAF7F0;   /* Background utama */
+  --color-white        : #FFFFFF;   /* Kartu, modal */
+  --color-emas         : #C9A84C;   /* Ornamen, divider */
+  --color-coklat       : #2C1A0E;   /* Body text */
+
+  /* --- Typography --- */
+  --font-serif : 'Playfair Display', Georgia, serif;
+  --font-sans  : 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* --- Spacing Scale (8-point grid) --- */
+  --space-1 : 0.25rem;   /*  4px */
+  --space-2 : 0.5rem;    /*  8px */
+  --space-3 : 0.75rem;   /* 12px */
+  --space-4 : 1rem;      /* 16px */
+  --space-5 : 1.25rem;   /* 20px */
+  --space-6 : 1.5rem;    /* 24px */
+  --space-8 : 2rem;      /* 32px */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px */
+  --space-16: 4rem;      /* 64px */
+  --space-20: 5rem;      /* 80px */
+
+  /* --- Border radius --- */
+  --radius-sm  : 0.375rem;
+  --radius-md  : 0.75rem;
+  --radius-lg  : 1rem;
+  --radius-full: 9999px;
+
+  /* --- Shadows --- */
+  --shadow-sm  : 0 1px 4px rgba(0,0,0,0.07);
+  --shadow-md  : 0 4px 16px rgba(0,0,0,0.10);
+  --shadow-lg  : 0 8px 32px rgba(0,0,0,0.14);
+  --shadow-gold: 0 4px 20px rgba(201,168,76,0.35);
+
+  /* --- Section spacing --- */
+  --section-padding-y: var(--space-16);
+
+  /* --- Container max-width --- */
+  --container-max: 1100px;
+  --container-px : var(--space-6);
+}
+
+/* ============================================================
+   2. Reset & Base
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin    : 0;
+  padding   : 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size      : 16px;
+}
+
+body {
+  font-family     : var(--font-sans);
+  font-size       : 1rem;
+  line-height     : 1.6;
+  color           : var(--color-coklat);
+  background-color: var(--color-cream);
+  -webkit-font-smoothing : antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x      : hidden;
+}
+
+img,
+svg {
+  max-width   : 100%;
+  display     : block;
+  height      : auto;
+}
+
+a {
+  color          : var(--color-hijau-tua);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  border     : none;
+  background : none;
+  cursor     : pointer;
+}
+
+/* tsParticles container — full-screen, behind everything */
+#tsparticles {
+  position  : fixed;
+  inset     : 0;
+  z-index   : 0;
+  pointer-events: none;
+}
+
+/* ============================================================
+   3. Typography Utilities
+   ============================================================ */
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  line-height: 1.25;
+  color      : var(--color-hijau-tua);
+}
+
+h1 { font-size: clamp(2rem, 6vw, 3.5rem); }
+h2 { font-size: clamp(1.5rem, 4vw, 2.25rem); }
+h3 { font-size: clamp(1.125rem, 3vw, 1.5rem); }
+
+p { margin-bottom: 0; }
+
+.text-serif { font-family: var(--font-serif); }
+.text-sans  { font-family: var(--font-sans); }
+
+.text-gold   { color: var(--color-emas); }
+.text-green  { color: var(--color-hijau-tua); }
+.text-muted  { color: var(--color-hijau-medium); }
+.text-center { text-align: center; }
+
+/* Accessible visually-hidden text */
+.sr-only {
+  position  : absolute;
+  width     : 1px;
+  height    : 1px;
+  padding   : 0;
+  margin    : -1px;
+  overflow  : hidden;
+  clip      : rect(0,0,0,0);
+  white-space: nowrap;
+  border    : 0;
+}
+
+/* ============================================================
+   4. Layout Utilities
+   ============================================================ */
+
+/* Generic section wrapper */
+.section {
+  position       : relative;
+  z-index        : 1;
+  padding-top    : var(--section-padding-y);
+  padding-bottom : var(--section-padding-y);
+}
+
+/* Centered content container */
+.section-inner {
+  max-width    : var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-px);
+}
+
+/* Section header: title + ornamental divider */
+.section-header {
+  text-align   : center;
+  margin-bottom: var(--space-10);
+}
+
+.section-title {
+  font-family   : var(--font-serif);
+  font-size     : clamp(1.75rem, 4vw, 2.5rem);
+  color         : var(--color-hijau-tua);
+  letter-spacing: 0.02em;
+  margin-bottom : var(--space-4);
+}
+
+.section-subtitle {
+  font-family: var(--font-sans);
+  font-size  : 1rem;
+  color      : var(--color-hijau-medium);
+  max-width  : 520px;
+  margin     : var(--space-3) auto 0;
+  line-height: 1.7;
+}
+
+/* Ornamental divider below section titles */
+.section-divider {
+  display       : block;
+  width         : 80px;
+  height        : 2px;
+  background    : linear-gradient(90deg, transparent, var(--color-emas), transparent);
+  margin-inline : auto;
+  margin-top    : var(--space-3);
+  border-radius : var(--radius-full);
+}
+
+/* Alternate section backgrounds */
+.section--alt {
+  background-color: color-mix(in srgb, var(--color-sage) 15%, var(--color-cream));
+}
+
+/* ============================================================
+   5. Skeleton Loaders
+   ============================================================ */
+
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(200,221,176,0.35) 25%,
+    rgba(200,221,176,0.70) 50%,
+    rgba(200,221,176,0.35) 75%
+  );
+  background-size: 800px 100%;
+  animation      : shimmer 1.4s infinite linear;
+  border-radius  : var(--radius-sm);
+}
+
+.skeleton--text          { height: 1rem;   width: 100%; margin-bottom: var(--space-2); }
+.skeleton--short         { width: 60%; }
+.skeleton--title         { height: 1.75rem; width: 50%; margin: 0 auto var(--space-4); }
+.skeleton--button        { height: 2.75rem; width: 9rem; border-radius: var(--radius-sm); }
+.skeleton--card          { height: 280px; }
+.skeleton--input         { height: 2.75rem; margin-bottom: var(--space-4); }
+.skeleton--map           { height: 400px; border-radius: var(--radius-md); }
+.skeleton--countdown-block { height: 90px; width: 90px; border-radius: var(--radius-md); }
+.skeleton--gallery-item  { height: 200px; border-radius: var(--radius-md); }
+.skeleton--timeline-item { height: 100px; width: 100%; margin-bottom: var(--space-4); }
+.skeleton--guestbook-item{ height: 80px;  margin-bottom: var(--space-3); border-radius: var(--radius-md); }
+
+.skeleton-loader {
+  display: none; /* shown via JS when loading */
+}
+
+.skeleton-loader--cover {
+  display       : flex;
+  flex-direction: column;
+  align-items   : center;
+  gap           : var(--space-4);
+  padding       : var(--space-10);
+}
+
+.skeleton-loader--events,
+.skeleton-loader--couple {
+  display              : grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap                  : var(--space-6);
+}
+
+.skeleton-loader--countdown {
+  display    : flex;
+  gap        : var(--space-4);
+  justify-content: center;
+}
+
+.skeleton-loader--gallery {
+  display              : grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap                  : var(--space-4);
+}
+
+.skeleton-loader--rsvp,
+.skeleton-loader--bismillah,
+.skeleton-loader--maps {
+  display       : flex;
+  flex-direction: column;
+  gap           : var(--space-4);
+  max-width     : 560px;
+  margin-inline : auto;
+}
+
+.skeleton-loader--timeline {
+  display       : flex;
+  flex-direction: column;
+  gap           : var(--space-4);
+}
+
+.skeleton-loader--guestbook {
+  display       : flex;
+  flex-direction: column;
+  gap           : var(--space-3);
+}
+
+.skeleton-loader--envelope {
+  display              : grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap                  : var(--space-6);
+}
+
+/* ============================================================
+   6. Music Toggle (fixed, bottom-right)
+   ============================================================ */
+
+.music-toggle {
+  position        : fixed;
+  bottom          : var(--space-6);
+  right           : var(--space-6);
+  z-index         : 100;
+  width           : 3rem;
+  height          : 3rem;
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+  background-color: var(--color-white);
+  color           : var(--color-hijau-tua);
+  border          : 2px solid var(--color-hijau-medium);
+  border-radius   : var(--radius-full);
+  box-shadow      : var(--shadow-md);
+  cursor          : pointer;
+  transition      : background-color 200ms ease, color 200ms ease,
+                    transform 200ms ease, box-shadow 200ms ease;
+}
+
+.music-toggle:hover:not(:disabled) {
+  background-color: var(--color-hijau-tua);
+  color           : var(--color-cream);
+  transform       : scale(1.08);
+  box-shadow      : 0 4px 20px rgba(45,80,22,0.35);
+}
+
+.music-toggle:disabled {
+  opacity       : 0.40;
+  cursor        : not-allowed;
+  pointer-events: none;
+}
+
+.music-toggle svg {
+  width       : 1.125rem;
+  height      : 1.125rem;
+  stroke-width: 2;
+  flex-shrink : 0;
+}
+
+/* ============================================================
+   7. Section: Cover
+   ============================================================ */
+
+.section--cover {
+  min-height      : 100dvh;
+  min-height      : 100vh; /* fallback */
+  display         : flex;
+  flex-direction  : column;
+  align-items     : center;
+  justify-content : center;
+  overflow        : hidden;
+  padding         : 0;
+
+  /* Heritage batik/floral background pattern via radial gradients */
+  background-color: var(--color-hijau-tua);
+  background-image:
+    radial-gradient(ellipse at 15% 20%, rgba(201,168,76,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 75%, rgba(201,168,76,0.14) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(135,168,120,0.12) 0%, transparent 70%);
+  background-size  : cover;
+  text-align       : center;
+  color            : var(--color-cream);
+}
+
+/* ---- Envelope stage (opening animation) ---- */
+
+.envelope-stage {
+  position: absolute;
+  inset   : 0;
+  display : flex;
+  align-items    : center;
+  justify-content: center;
+  z-index : 5;
+}
+
+.envelope {
+  position: relative;
+  width   : 280px;
+  height  : 200px;
+}
+
+.envelope-body {
+  position        : absolute;
+  inset           : 0;
+  background-color: var(--color-cream);
+  border-radius   : 0 0 var(--radius-md) var(--radius-md);
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+  overflow        : hidden;
+}
+
+.envelope-lid {
+  position       : absolute;
+  top            : 0;
+  left           : 0;
+  right          : 0;
+  height         : 50%;
+  background-color: var(--color-hijau-medium);
+  clip-path      : polygon(0 0, 50% 100%, 100% 0);
+  transform-origin: top center;
+  z-index        : 2;
+}
+
+.invitation-card {
+  position        : absolute;
+  width           : 85%;
+  background-color: var(--color-white);
+  border-radius   : var(--radius-sm);
+  padding         : var(--space-6);
+  text-align      : center;
+  opacity         : 0;
+  transform       : translateY(0);
+  box-shadow      : var(--shadow-md);
+}
+
+.invitation-card__bismillah {
+  font-family: var(--font-serif);
+  font-size  : 1.125rem;
+  color      : var(--color-hijau-tua);
+  line-height: 2;
+  direction  : rtl;
+}
+
+/* ---- Flower petals ---- */
+
+.flower-petals {
+  position: absolute;
+  inset   : 0;
+  pointer-events: none;
+}
+
+.petal {
+  position      : absolute;
+  width         : 12px;
+  height        : 18px;
+  background-color: var(--color-emas);
+  border-radius : 50% 50% 50% 0;
+  opacity       : 0;
+}
+
+.petal--1 { top: 30%; left: 20%; transform: rotate( 30deg); }
+.petal--2 { top: 20%; left: 70%; transform: rotate(120deg); }
+.petal--3 { top: 60%; left: 15%; transform: rotate(200deg); }
+.petal--4 { top: 65%; left: 75%; transform: rotate(300deg); }
+.petal--5 { top: 15%; left: 45%; transform: rotate( 60deg); }
+.petal--6 { top: 75%; left: 50%; transform: rotate(240deg); }
+
+/* ---- Cover content ---- */
+
+.cover-content {
+  position       : relative;
+  z-index        : 10;
+  display        : flex;
+  flex-direction : column;
+  align-items    : center;
+  gap            : var(--space-4);
+  padding        : var(--space-8) var(--space-6);
+  opacity        : 0; /* shown by GSAP after animation */
+  pointer-events : none;
+}
+
+.cover-content.is-visible {
+  opacity       : 1;
+  pointer-events: auto;
+}
+
+/* Corner ornaments */
+.cover-ornament {
+  position: absolute;
+  opacity : 0.60;
+}
+
+.cover-ornament--left {
+  left  : var(--space-4);
+  top   : var(--space-4);
+}
+
+.cover-ornament--right {
+  right    : var(--space-4);
+  bottom   : var(--space-4);
+  transform: rotate(180deg);
+}
+
+.cover-greeting {
+  font-family   : var(--font-sans);
+  font-size     : 0.875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color         : var(--color-hijau-muda);
+}
+
+.cover-guest-name {
+  font-family   : var(--font-serif);
+  font-size     : clamp(1.25rem, 4vw, 1.75rem);
+  font-style    : italic;
+  color         : var(--color-cream);
+}
+
+.cover-divider {
+  color    : var(--color-emas);
+  font-size: 1.25rem;
+  letter-spacing: 0.25em;
+  opacity  : 0.85;
+  margin   : var(--space-1) 0;
+}
+
+.cover-label {
+  font-family   : var(--font-sans);
+  font-size     : 0.75rem;
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  color         : var(--color-hijau-muda);
+}
+
+.cover-couple-names {
+  font-family   : var(--font-serif);
+  font-size     : clamp(2.25rem, 7vw, 4rem);
+  font-weight   : 700;
+  color         : var(--color-cream);
+  line-height   : 1.15;
+  display       : flex;
+  align-items   : center;
+  gap           : var(--space-3);
+  flex-wrap     : wrap;
+  justify-content: center;
+}
+
+.cover-ampersand {
+  color         : var(--color-emas);
+  font-style    : italic;
+  font-weight   : 400;
+}
+
+.cover-date {
+  font-family   : var(--font-sans);
+  font-size     : clamp(0.875rem, 2.5vw, 1rem);
+  letter-spacing: 0.18em;
+  color         : var(--color-hijau-muda);
+}
+
+.cover-actions {
+  display       : flex;
+  flex-direction: column;
+  align-items   : center;
+  gap           : var(--space-3);
+  margin-top    : var(--space-4);
+}
+
+/* Cover-specific button overrides */
+.btn--open {
+  background-color: var(--color-emas);
+  color           : #1a0f00;
+  border          : 2px solid transparent;
+  padding         : var(--space-4) var(--space-10);
+  font-weight     : 700;
+  font-size       : 1rem;
+  letter-spacing  : 0.04em;
+  border-radius   : var(--radius-sm);
+  display         : inline-flex;
+  align-items     : center;
+  gap             : var(--space-2);
+  transition      : background-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+}
+
+.btn--open:hover {
+  background-color: #d4b55a;
+  transform       : translateY(-2px);
+  box-shadow      : var(--shadow-gold);
+}
+
+.btn--ghost,
+.btn--skip {
+  background-color: transparent;
+  color           : var(--color-hijau-muda);
+  border          : 1px solid rgba(200,221,176,0.45);
+  padding         : var(--space-2) var(--space-6);
+  font-size       : 0.875rem;
+  border-radius   : var(--radius-sm);
+  transition      : border-color 200ms ease, color 200ms ease;
+}
+
+.btn--ghost:hover,
+.btn--skip:hover {
+  border-color: var(--color-hijau-muda);
+  color       : var(--color-cream);
+}
+
+/* ============================================================
+   8. Section: Bismillah / Pembuka
+   ============================================================ */
+
+.section--bismillah {
+  background-color: var(--color-white);
+  text-align      : center;
+}
+
+.bismillah-content {
+  max-width    : 620px;
+  margin-inline: auto;
+  display      : flex;
+  flex-direction: column;
+  align-items  : center;
+  gap          : var(--space-6);
+}
+
+.bismillah-text {
+  font-family: var(--font-serif);
+  font-size  : clamp(1.75rem, 5vw, 2.75rem);
+  color      : var(--color-hijau-tua);
+  line-height: 2;
+  direction  : rtl;
+}
+
+.bismillah-divider {
+  width           : 120px;
+  height          : 2px;
+  background      : linear-gradient(90deg, transparent, var(--color-emas), transparent);
+  border-radius   : var(--radius-full);
+  margin          : 0 auto;
+}
+
+.bismillah-body {
+  max-width : 540px;
+  text-align: center;
+}
+
+.bismillah-opening {
+  font-family: var(--font-sans);
+  font-size  : 1rem;
+  line-height: 1.85;
+  color      : var(--color-coklat);
+  opacity    : 0.85;
+}
+
+/* ============================================================
+   9. Section: Couple (Profil Mempelai)
+   ============================================================ */
+
+.section--couple {
+  background-color: var(--color-cream);
+}
+
+.couple-grid {
+  display              : grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap                  : var(--space-8);
+  align-items          : start;
+}
+
+.couple-card {
+  background-color: var(--color-white);
+  border-radius   : var(--radius-lg);
+  overflow        : hidden;
+  box-shadow      : var(--shadow-md);
+  text-align      : center;
+  transition      : transform 300ms ease, box-shadow 300ms ease;
+}
+
+.couple-card:hover {
+  transform : translateY(-4px);
+  box-shadow: 0 12px 36px rgba(45,80,22,0.16);
+}
+
+.couple-card__photo-wrap {
+  position        : relative;
+  background      : linear-gradient(160deg, var(--color-sage) 0%, var(--color-hijau-muda) 100%);
+  padding-top     : var(--space-8);
+  padding-bottom  : 0;
+  display         : flex;
+  justify-content : center;
+}
+
+.couple-card__photo {
+  width        : 180px;
+  height       : 180px;
+  object-fit   : cover;
+  border-radius: var(--radius-full);
+  border       : 4px solid var(--color-white);
+  box-shadow   : 0 4px 16px rgba(45,80,22,0.20);
+  margin-bottom: calc(-1 * var(--space-8));
+}
+
+.couple-card__info {
+  padding   : calc(var(--space-8) + var(--space-4)) var(--space-6) var(--space-8);
+  display   : flex;
+  flex-direction: column;
+  align-items: center;
+  gap       : var(--space-2);
+}
+
+.couple-card__role {
+  font-family   : var(--font-sans);
+  font-size     : 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color         : var(--color-hijau-medium);
+}
+
+.couple-card__name {
+  font-family: var(--font-serif);
+  font-size  : clamp(1.25rem, 3vw, 1.625rem);
+  color      : var(--color-hijau-tua);
+}
+
+.couple-card__nickname {
+  font-family: var(--font-serif);
+  font-style : italic;
+  font-size  : 1rem;
+  color      : var(--color-emas);
+}
+
+.couple-card__parents {
+  font-family: var(--font-sans);
+  font-size  : 0.875rem;
+  color      : var(--color-coklat);
+  opacity    : 0.80;
+  line-height: 1.65;
+}
+
+.couple-card__parents strong {
+  color  : var(--color-hijau-tua);
+  font-weight: 600;
+}
+
+/* ============================================================
+   10. Section: Events (Detail Acara)
+   ============================================================ */
+
+.section--events {
+  background-color: color-mix(in srgb, var(--color-sage) 12%, var(--color-cream));
+}
+
+.events-grid {
+  display              : grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap                  : var(--space-8);
+}
+
+.event-card {
+  background-color: var(--color-white);
+  border-radius   : var(--radius-lg);
+  overflow        : hidden;
+  box-shadow      : var(--shadow-md);
+  display         : flex;
+  flex-direction  : column;
+  transition      : transform 300ms ease, box-shadow 300ms ease;
+}
+
+.event-card:hover {
+  transform : translateY(-4px);
+  box-shadow: 0 12px 36px rgba(45,80,22,0.15);
+}
+
+.event-card__header {
+  background    : linear-gradient(135deg, var(--color-hijau-tua) 0%, var(--color-hijau-medium) 100%);
+  padding       : var(--space-6);
+  text-align    : center;
+  display       : flex;
+  flex-direction: column;
+  align-items   : center;
+  gap           : var(--space-3);
+}
+
+.event-card__icon {
+  width : 2rem;
+  height: 2rem;
+  color : var(--color-emas);
+}
+
+.event-card__type {
+  font-family   : var(--font-sans);
+  font-size     : 0.875rem;
+  font-weight   : 700;
+  letter-spacing: 0.35em;
+  color         : var(--color-cream);
+}
+
+.event-card__body {
+  padding  : var(--space-6);
+  flex-grow: 1;
+}
+
+.event-card__details {
+  display       : flex;
+  flex-direction: column;
+  gap           : var(--space-3);
+}
+
+.event-card__date,
+.event-card__time,
+.event-card__venue {
+  display    : flex;
+  align-items: center;
+  gap        : var(--space-2);
+  font-family: var(--font-sans);
+  font-size  : 0.9375rem;
+  color      : var(--color-coklat);
+}
+
+.event-card__date svg,
+.event-card__time svg,
+.event-card__venue svg {
+  width      : 1rem;
+  height     : 1rem;
+  color      : var(--color-hijau-medium);
+  flex-shrink: 0;
+}
+
+.event-card__address {
+  font-size  : 0.875rem;
+  color      : var(--color-coklat);
+  opacity    : 0.75;
+  padding-left: var(--space-6); /* indent under the venue icon */
+  line-height: 1.6;
+}
+
+.event-card__actions {
+  padding  : 0 var(--space-6) var(--space-6);
+  margin-top: auto;
+}
+
+/* Calendar button inherits .btn--outline (below) */
+.btn--calendar {
+  width: 100%;
+  justify-content: center;
+}
+
+/* ============================================================
+   11. Section: Countdown Timer
+   ============================================================ */
+
+.section--countdown {
+  background-color: var(--color-hijau-tua);
+  color           : var(--color-cream);
+  text-align      : center;
+}
+
+.section--countdown .section-title {
+  color: var(--color-cream);
+}
+
+.section--countdown .section-divider {
+  background: linear-gradient(90deg, transparent, var(--color-emas), transparent);
+}
+
+.countdown-wrap {
+  display        : flex;
+  flex-direction : column;
+  align-items    : center;
+  gap            : var(--space-6);
+}
+
+.countdown-grid {
+  display    : flex;
+  align-items: center;
+  gap        : var(--space-4);
+  flex-wrap  : wrap;
+  justify-content: center;
+}
+
+.counter {
+  display         : flex;
+  flex-direction  : column;
+  align-items     : center;
+  background-color: rgba(255,255,255,0.10);
+  border          : 1px solid rgba(201,168,76,0.35);
+  border-radius   : var(--radius-md);
+  padding         : var(--space-5) var(--space-6);
+  min-width       : 90px;
+  backdrop-filter : blur(4px);
+}
+
+.counter__value {
+  font-family: var(--font-serif);
+  font-size  : clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  line-height: 1;
+  color      : var(--color-cream);
+  min-width  : 2ch;
+  text-align : center;
+}
+
+.counter__label {
+  font-family   : var(--font-sans);
+  font-size     : 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color         : var(--color-hijau-muda);
+  margin-top    : var(--space-2);
+}
+
+/* Colon separator */
+.counter--separator {
+  font-family: var(--font-serif);
+  font-size  : 2rem;
+  font-weight: 700;
+  color      : var(--color-emas);
+  background : none;
+  border     : none;
+  padding    : 0;
+  min-width  : 0;
+  margin-bottom: 1.5rem; /* align with value, above label */
+}
+
+.countdown-elapsed {
+  font-family   : var(--font-serif);
+  font-size     : clamp(1.125rem, 3vw, 1.5rem);
+  font-style    : italic;
+  color         : var(--color-emas);
+}
+
+/* ============================================================
+   12. Section: Gallery + Lightbox
+   ============================================================ */
+
+.section--gallery {
+  background-color: var(--color-cream);
+}
+
+/* Masonry grid via CSS columns */
+.gallery-masonry {
+  columns              : 3;
+  column-gap           : var(--space-4);
+}
+
+.gallery-masonry .gallery-item {
+  break-inside   : avoid;
+  margin-bottom  : var(--space-4);
+  display        : block;
+  border-radius  : var(--radius-md);
+  overflow       : hidden;
+  cursor         : pointer;
+  position       : relative;
+}
+
+.gallery-masonry .gallery-item img {
+  width     : 100%;
+  display   : block;
+  object-fit: cover;
+  transition: transform 300ms ease;
+}
+
+.gallery-masonry .gallery-item:hover img {
+  transform: scale(1.04);
+}
+
+/* Overlay on hover */
+.gallery-masonry .gallery-item::after {
+  content   : '';
+  position  : absolute;
+  inset     : 0;
+  background: rgba(45,80,22,0.25);
+  opacity   : 0;
+  transition: opacity 250ms ease;
+}
+
+.gallery-masonry .gallery-item:hover::after {
+  opacity: 1;
+}
+
+.gallery-empty {
+  text-align : center;
+  font-size  : 0.9375rem;
+  color      : var(--color-hijau-medium);
+  padding    : var(--space-8) 0;
+}
+
+/* ---- Lightbox ---- */
+
+.lightbox {
+  position        : fixed;
+  inset           : 0;
+  z-index         : 200;
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+}
+
+.lightbox[hidden] {
+  display: none;
+}
+
+.lightbox__overlay {
+  position  : absolute;
+  inset     : 0;
+  background: rgba(0,0,0,0.88);
+  cursor    : pointer;
+}
+
+.lightbox__content {
+  position        : relative;
+  z-index         : 1;
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+  gap             : var(--space-4);
+  max-width       : 90vw;
+  max-height      : 90vh;
+  padding         : var(--space-4);
+}
+
+.lightbox__img {
+  max-width    : 80vw;
+  max-height   : 80vh;
+  object-fit   : contain;
+  border-radius: var(--radius-md);
+  box-shadow   : var(--shadow-lg);
+}
+
+.lightbox__close {
+  position        : absolute;
+  top             : -var(--space-4);
+  right           : -var(--space-4);
+  width           : 2.5rem;
+  height          : 2.5rem;
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+  background-color: var(--color-white);
+  color           : var(--color-hijau-tua);
+  border-radius   : var(--radius-full);
+  box-shadow      : var(--shadow-md);
+  top             : -1.25rem;
+  right           : -1.25rem;
+  transition      : transform 200ms ease;
+}
+
+.lightbox__close:hover {
+  transform: scale(1.1);
+}
+
+.lightbox__nav {
+  width           : 3rem;
+  height          : 3rem;
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+  background-color: rgba(255,255,255,0.15);
+  color           : var(--color-white);
+  border-radius   : var(--radius-full);
+  border          : 1px solid rgba(255,255,255,0.30);
+  transition      : background-color 200ms ease, transform 200ms ease;
+  flex-shrink     : 0;
+}
+
+.lightbox__nav:hover:not(:disabled) {
+  background-color: rgba(255,255,255,0.30);
+  transform       : scale(1.05);
+}
+
+.lightbox__nav:disabled {
+  opacity       : 0.25;
+  cursor        : not-allowed;
+  pointer-events: none;
+}
+
+/* ============================================================
+   13. Section: Love Story / Timeline
+   ============================================================ */
+
+.section--love-story {
+  background-color: color-mix(in srgb, var(--color-sage) 12%, var(--color-cream));
+}
+
+.timeline {
+  position      : relative;
+  max-width     : 720px;
+  margin-inline : auto;
+  padding-left  : var(--space-8);
+}
+
+/* Vertical line */
+.timeline::before {
+  content         : '';
+  position        : absolute;
+  left            : calc(var(--space-8) - 1px);
+  top             : var(--space-4);
+  bottom          : var(--space-4);
+  width           : 2px;
+  background      : linear-gradient(to bottom, transparent, var(--color-emas), transparent);
+}
+
+.timeline-item {
+  position     : relative;
+  margin-bottom: var(--space-10);
+  padding-left : var(--space-8);
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Dot on the timeline */
+.timeline-item__dot {
+  position        : absolute;
+  left            : calc(-1 * var(--space-4) - 6px);
+  top             : var(--space-1);
+  width           : 14px;
+  height          : 14px;
+  background-color: var(--color-emas);
+  border          : 3px solid var(--color-white);
+  border-radius   : var(--radius-full);
+  box-shadow      : 0 0 0 3px rgba(201,168,76,0.30);
+}
+
+.timeline-item__card {
+  background-color: var(--color-white);
+  border-radius   : var(--radius-md);
+  padding         : var(--space-5) var(--space-6);
+  box-shadow      : var(--shadow-sm);
+  transition      : box-shadow 250ms ease, transform 250ms ease;
+}
+
+.timeline-item:hover .timeline-item__card {
+  box-shadow: var(--shadow-md);
+  transform : translateX(4px);
+}
+
+.timeline-item__date {
+  font-family   : var(--font-sans);
+  font-size     : 0.8125rem;
+  font-weight   : 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color         : var(--color-hijau-medium);
+  display       : block;
+  margin-bottom : var(--space-2);
+}
+
+.timeline-item__title {
+  font-family: var(--font-serif);
+  font-size  : 1.125rem;
+  color      : var(--color-hijau-tua);
+  margin-bottom: var(--space-2);
+}
+
+.timeline-item__desc {
+  font-family: var(--font-sans);
+  font-size  : 0.9375rem;
+  line-height: 1.70;
+  color      : var(--color-coklat);
+  opacity    : 0.82;
+}
+
+/* Optional photo inside timeline card */
+.timeline-item__photo {
+  width        : 100%;
+  max-height   : 200px;
+  object-fit   : cover;
+  border-radius: var(--radius-sm);
+  margin-top   : var(--space-4);
+}
+
+/* ============================================================
+   14. Section: Maps (Peta Lokasi)
+   ============================================================ */
+
+.section--maps {
+  background-color: var(--color-white);
+}
+
+.maps-container {
+  display       : flex;
+  flex-direction: column;
+  gap           : var(--space-6);
+  max-width     : 860px;
+  margin-inline : auto;
+}
+
+.maps-embed-wrap {
+  position     : relative;
+  border-radius: var(--radius-lg);
+  overflow     : hidden;
+  box-shadow   : var(--shadow-md);
+  line-height  : 0; /* remove gap below iframe */
+}
+
+.maps-embed-wrap iframe {
+  width        : 100%;
+  height       : 400px;
+  border       : none;
+  display      : block;
+  border-radius: var(--radius-lg);
+}
+
+.maps-fallback {
+  display         : flex;
+  align-items     : center;
+  gap             : var(--space-3);
+  padding         : var(--space-6);
+  background-color: var(--color-cream);
+  border-radius   : var(--radius-md);
+  font-family     : var(--font-sans);
+  font-size       : 0.9375rem;
+  font-style      : normal;
+  color           : var(--color-coklat);
+  line-height     : 1.65;
+}
+
+.maps-fallback svg {
+  color      : var(--color-hijau-medium);
+  flex-shrink: 0;
+}
+
+.maps-actions {
+  display        : flex;
+  justify-content: center;
+}
+
+/* ============================================================
+   15. Section: RSVP
+   ============================================================ */
+
+.section--rsvp {
+  background-color: var(--color-cream);
+}
+
+.rsvp-wrap {
+  max-width    : 560px;
+  margin-inline: auto;
+}
+
+/* ============================================================
+   16. Section: Guestbook (Buku Tamu)
+   ============================================================ */
+
+.section--guestbook {
+  background-color: color-mix(in srgb, var(--color-sage) 10%, var(--color-cream));
+}
+
+.guestbook-wrap {
+  display      : grid;
+  gap          : var(--space-10);
+  max-width    : 720px;
+  margin-inline: auto;
+}
+
+.guestbook-form-wrap {
+  background-color: var(--color-white);
+  border-radius   : var(--radius-lg);
+  padding         : var(--space-8);
+  box-shadow      : var(--shadow-md);
+}
+
+.guestbook-list {
+  display       : flex;
+  flex-direction: column;
+  gap           : var(--space-4);
+}
+
+/* Individual guestbook entries (styled base; hover in animations.css) */
+.guestbook-entry__name {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size  : 0.9375rem;
+  color      : var(--color-hijau-tua);
+  margin-bottom: var(--space-1);
+}
+
+.guestbook-entry__message {
+  font-family: var(--font-sans);
+  font-size  : 0.9375rem;
+  line-height: 1.70;
+  color      : var(--color-coklat);
+}
+
+.guestbook-entry__meta {
+  font-size : 0.8125rem;
+  color     : var(--color-hijau-medium);
+  margin-top: var(--space-2);
+}
+
+.guestbook-empty {
+  text-align: center;
+  font-size : 0.9375rem;
+  color     : var(--color-hijau-medium);
+  padding   : var(--space-8) 0;
+}
+
+/* Character counter */
+.form-char-count {
+  font-family: var(--font-sans);
+  font-size  : 0.8125rem;
+  color      : var(--color-hijau-medium);
+  margin-left: auto;
+}
+
+.form-char-count.is-limit {
+  color      : #c0392b;
+  font-weight: 600;
+}
+
+/* ============================================================
+   17. Section: Envelope (Amplop Digital)
+   ============================================================ */
+
+.section--envelope {
+  background-color: var(--color-hijau-tua);
+  color           : var(--color-cream);
+}
+
+.section--envelope .section-title {
+  color: var(--color-cream);
+}
+
+.section--envelope .section-divider {
+  background: linear-gradient(90deg, transparent, var(--color-emas), transparent);
+}
+
+.section--envelope .section-subtitle {
+  color: var(--color-hijau-muda);
+}
+
+.envelope-grid {
+  display              : grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap                  : var(--space-6);
+  max-width            : 760px;
+  margin-inline        : auto;
+}
+
+/* envelope-card base styles are in animations.css; extend here */
+.envelope-card__bank {
+  font-family   : var(--font-sans);
+  font-size     : 0.8125rem;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color         : var(--color-hijau-muda);
+  margin-bottom : var(--space-2);
+}
+
+.envelope-card__holder {
+  font-family: var(--font-serif);
+  font-size  : 1.125rem;
+  color      : var(--color-cream);
+  margin-bottom: var(--space-1);
+}
+
+.envelope-card__number {
+  font-family   : 'Courier New', monospace;
+  font-size     : 1.25rem;
+  letter-spacing: 0.15em;
+  color         : var(--color-emas);
+  margin-bottom : var(--space-4);
+  word-break    : break-all;
+}
+
+/* Background ornament inside card */
+.envelope-card::before {
+  content        : '';
+  position       : absolute;
+  right          : -20px;
+  bottom         : -20px;
+  width          : 120px;
+  height         : 120px;
+  background-color: rgba(255,255,255,0.04);
+  border-radius  : var(--radius-full);
+}
+
+.envelope-card .btn--copy {
+  background-color: rgba(255,255,255,0.15);
+  color           : var(--color-cream);
+  border          : 1px solid rgba(255,255,255,0.30);
+  padding         : var(--space-2) var(--space-5);
+  border-radius   : var(--radius-sm);
+  font-size       : 0.875rem;
+  display         : inline-flex;
+  align-items     : center;
+  gap             : var(--space-2);
+  transition      : background-color 200ms ease;
+}
+
+.envelope-card .btn--copy:hover {
+  background-color: rgba(255,255,255,0.28);
+}
+
+.envelope-card .btn--copy.is-copied {
+  background-color: var(--color-emas);
+  color           : #1a0f00;
+  border-color    : transparent;
+}
+
+.envelope-empty {
+  color     : var(--color-hijau-muda);
+  text-align: center;
+  padding   : var(--space-8) 0;
+  font-size : 0.9375rem;
+}
+
+/* ============================================================
+   18. Section: Footer / Share
+   ============================================================ */
+
+.section--footer {
+  background-color: var(--color-white);
+  text-align      : center;
+  padding-bottom  : var(--space-20);
+}
+
+.footer-content {
+  max-width    : 560px;
+  margin-inline: auto;
+  display      : flex;
+  flex-direction: column;
+  align-items  : center;
+  gap          : var(--space-6);
+}
+
+.footer-ornament img {
+  margin-inline: auto;
+  opacity      : 0.70;
+}
+
+.footer-hashtag {
+  font-family   : var(--font-serif);
+  font-size     : 1.5rem;
+  font-style    : italic;
+  color         : var(--color-emas);
+}
+
+.footer-message {
+  font-family: var(--font-sans);
+  font-size  : 0.9375rem;
+  line-height: 1.80;
+  color      : var(--color-coklat);
+  opacity    : 0.80;
+}
+
+/* Share buttons */
+.footer-share {
+  display       : flex;
+  flex-direction: column;
+  align-items   : center;
+  gap           : var(--space-4);
+  width         : 100%;
+}
+
+.footer-share__label {
+  font-family   : var(--font-sans);
+  font-size     : 0.875rem;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color         : var(--color-hijau-medium);
+}
+
+.footer-share__actions {
+  display    : flex;
+  gap        : var(--space-3);
+  flex-wrap  : wrap;
+  justify-content: center;
+}
+
+.btn--whatsapp {
+  display         : inline-flex;
+  align-items     : center;
+  gap             : var(--space-2);
+  padding         : var(--space-3) var(--space-6);
+  background-color: #25D366;
+  color           : #ffffff;
+  border-radius   : var(--radius-sm);
+  font-family     : var(--font-sans);
+  font-weight     : 600;
+  font-size       : 0.9375rem;
+  transition      : background-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+}
+
+.btn--whatsapp:hover {
+  background-color: #1ebe5a;
+  transform       : translateY(-2px);
+  box-shadow      : 0 4px 14px rgba(37,211,102,0.40);
+}
+
+.footer-share__feedback {
+  font-family: var(--font-sans);
+  font-size  : 0.875rem;
+  color      : var(--color-hijau-medium);
+  font-weight: 600;
+}
+
+.footer-couple-names {
+  display       : flex;
+  flex-direction: column;
+  align-items   : center;
+  gap           : var(--space-2);
+  font-family   : var(--font-sans);
+  font-size     : 0.9375rem;
+  color         : var(--color-hijau-medium);
+}
+
+.footer-names {
+  font-family: var(--font-serif);
+  font-size  : 1.625rem;
+  font-style : italic;
+  color      : var(--color-hijau-tua);
+}
+
+.footer-credit {
+  font-size  : 0.8125rem;
+  color      : var(--color-hijau-medium);
+  display    : flex;
+  align-items: center;
+  gap        : var(--space-1);
+  justify-content: center;
+}
+
+.footer-heart-icon {
+  display: inline;
+  width  : 0.875rem;
+  height : 0.875rem;
+  color  : #e74c3c;
+  vertical-align: middle;
+}
+
+/* ============================================================
+   19. Form Elements (shared — RSVP, Guestbook)
+   ============================================================ */
+
+.form {
+  display       : flex;
+  flex-direction: column;
+  gap           : var(--space-5);
+}
+
+.form-group {
+  display       : flex;
+  flex-direction: column;
+  gap           : var(--space-2);
+}
+
+.form-label {
+  font-family: var(--font-sans);
+  font-size  : 0.9375rem;
+  font-weight: 500;
+  color      : var(--color-coklat);
+}
+
+.form-required {
+  color: #c0392b;
+  margin-left: var(--space-1);
+}
+
+.form-optional {
+  font-size  : 0.8125rem;
+  color      : var(--color-hijau-medium);
+  font-weight: 400;
+  margin-left: var(--space-1);
+}
+
+/* Base input styles */
+.form-input,
+.form-select,
+.form-textarea {
+  width           : 100%;
+  padding         : var(--space-3) var(--space-4);
+  font-family     : var(--font-sans);
+  font-size       : 0.9375rem;
+  color           : var(--color-coklat);
+  background-color: var(--color-white);
+  border          : 1.5px solid var(--color-hijau-muda);
+  border-radius   : var(--radius-sm);
+  transition      : border-color 200ms ease, box-shadow 200ms ease;
+  outline         : none;
+  appearance      : none;
+  -webkit-appearance: none;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color  : rgba(44,26,14,0.40);
+  opacity: 1;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--color-hijau-medium);
+  box-shadow  : 0 0 0 3px rgba(74,124,89,0.18);
+}
+
+.form-input:hover:not(:focus),
+.form-select:hover:not(:focus),
+.form-textarea:hover:not(:focus) {
+  border-color: var(--color-hijau-medium);
+}
+
+/* Validation states */
+.form-input.is-invalid,
+.form-select.is-invalid,
+.form-textarea.is-invalid {
+  border-color: #c0392b;
+  box-shadow  : 0 0 0 3px rgba(192,57,43,0.15);
+}
+
+.form-input.is-valid,
+.form-select.is-valid,
+.form-textarea.is-valid {
+  border-color: var(--color-hijau-medium);
+}
+
+/* Select arrow */
+.form-select {
+  cursor           : pointer;
+  background-image : url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234A7C59' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-4) center;
+  padding-right    : var(--space-10);
+}
+
+/* Textarea */
+.form-textarea {
+  resize     : vertical;
+  min-height : 120px;
+  line-height: 1.65;
+}
+
+/* Error & hint messages */
+.form-error {
+  font-family: var(--font-sans);
+  font-size  : 0.8125rem;
+  color      : #c0392b;
+  display    : block;
+  min-height : 1rem;
+}
+
+.form-error:empty {
+  display: none;
+}
+
+.form-hint {
+  font-family: var(--font-sans);
+  font-size  : 0.8125rem;
+  color      : var(--color-hijau-medium);
+}
+
+/* Meta row (error + char count) */
+.form-meta {
+  display        : flex;
+  justify-content: space-between;
+  align-items    : center;
+  gap            : var(--space-2);
+}
+
+/* Form action row */
+.form-actions {
+  margin-top: var(--space-2);
+}
+
+/* Full-width button variant */
+.btn--full {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Feedback message after form submit */
+.form-feedback {
+  padding         : var(--space-4);
+  border-radius   : var(--radius-sm);
+  font-family     : var(--font-sans);
+  font-size       : 0.9375rem;
+  text-align      : center;
+  line-height     : 1.55;
+}
+
+.form-feedback[hidden] {
+  display: none;
+}
+
+.form-feedback.is-success {
+  background-color: #eafaf1;
+  border          : 1px solid #27ae60;
+  color           : #1e8449;
+}
+
+.form-feedback.is-error {
+  background-color: #fdedec;
+  border          : 1px solid #e74c3c;
+  color           : #c0392b;
+}
+
+/* Shared outlined button (used in events calendar & footer copy) */
+.btn--outline {
+  display         : inline-flex;
+  align-items     : center;
+  gap             : var(--space-2);
+  padding         : var(--space-3) var(--space-5);
+  background-color: transparent;
+  color           : var(--color-hijau-tua);
+  border          : 1.5px solid var(--color-hijau-tua);
+  border-radius   : var(--radius-sm);
+  font-family     : var(--font-sans);
+  font-weight     : 600;
+  font-size       : 0.9375rem;
+  cursor          : pointer;
+  text-decoration : none;
+  transition      : background-color 200ms ease, color 200ms ease,
+                    box-shadow 200ms ease, transform 200ms ease;
+}
+
+.btn--outline:hover {
+  background-color: var(--color-hijau-tua);
+  color           : var(--color-cream);
+  box-shadow      : 0 4px 16px rgba(45,80,22,0.25);
+  transform       : translateY(-2px);
+  text-decoration : none;
+}
+
+/* Shared primary button (generic .btn--primary used in maps, etc.) */
+.btn--primary {
+  display         : inline-flex;
+  align-items     : center;
+  gap             : var(--space-2);
+  padding         : var(--space-3) var(--space-6);
+  background-color: var(--color-hijau-tua);
+  color           : var(--color-cream);
+  border          : 2px solid transparent;
+  border-radius   : var(--radius-sm);
+  font-family     : var(--font-sans);
+  font-weight     : 600;
+  font-size       : 0.9375rem;
+  cursor          : pointer;
+  text-decoration : none;
+  transition      : background-color 200ms ease, box-shadow 200ms ease,
+                    transform 200ms ease;
+}
+
+.btn--primary:hover {
+  background-color: #3d6b1f;
+  box-shadow      : 0 4px 16px rgba(45,80,22,0.35);
+  transform       : translateY(-2px);
+  text-decoration : none;
+}
+
+.btn--primary:disabled {
+  opacity       : 0.50;
+  cursor        : not-allowed;
+  pointer-events: none;
+  transform     : none;
+}
+
+/* Loading state for buttons */
+.btn--loading {
+  position: relative;
+  color   : transparent !important;
+}
+
+.btn--loading::after {
+  content      : '';
+  position     : absolute;
+  width        : 1rem;
+  height       : 1rem;
+  border       : 2px solid rgba(255,255,255,0.40);
+  border-top-color: var(--color-cream);
+  border-radius: var(--radius-full);
+  animation    : spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Number input — hide default spin arrows */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* ============================================================
+   20. Responsive Breakpoints
+   ============================================================
+   Mobile-first: base = mobile (< 768px)
+   Tablet  : 768px – 1023px  (2 kolom)
+   Desktop : ≥ 1024px        (3 kolom)
+   ============================================================ */
+
+/* ---- Mobile: < 768px (base — already single column) ----
+   Overrides to ensure 1-column layout on narrow screens       */
+
+@media (max-width: 767px) {
+  :root {
+    --section-padding-y: var(--space-12);
+    --container-px     : var(--space-4);
+  }
+
+  /* Cover */
+  .section--cover {
+    background-attachment: scroll; /* avoid parallax on iOS */
+  }
+
+  .cover-ornament {
+    display: none; /* too cramped on mobile */
+  }
+
+  .cover-couple-names {
+    flex-direction: column;
+    gap           : var(--space-1);
+  }
+
+  .cover-actions {
+    width  : 100%;
+    padding: 0 var(--space-4);
+  }
+
+  .btn--open {
+    width  : 100%;
+    justify-content: center;
+  }
+
+  /* Couple */
+  .couple-grid {
+    grid-template-columns: 1fr;
+    gap                  : var(--space-6);
+  }
+
+  /* Events */
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Countdown */
+  .countdown-grid {
+    gap: var(--space-2);
+  }
+
+  .counter {
+    min-width: 72px;
+    padding  : var(--space-4);
+  }
+
+  .counter__value {
+    font-size: 1.75rem;
+  }
+
+  /* Gallery */
+  .gallery-masonry {
+    columns    : 2;
+    column-gap : var(--space-3);
+  }
+
+  .skeleton-loader--gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Timeline */
+  .timeline {
+    padding-left: var(--space-6);
+  }
+
+  .timeline::before {
+    left: calc(var(--space-6) - 1px);
+  }
+
+  .timeline-item {
+    padding-left: var(--space-6);
+  }
+
+  .timeline-item__dot {
+    left: calc(-1 * var(--space-3) - 6px);
+  }
+
+  /* Envelope */
+  .envelope-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skeleton-loader--envelope {
+    grid-template-columns: 1fr;
+  }
+
+  /* Share */
+  .footer-share__actions {
+    flex-direction: column;
+    width         : 100%;
+  }
+
+  .btn--whatsapp,
+  .btn--outline {
+    width          : 100%;
+    justify-content: center;
+  }
+
+  /* Maps */
+  .maps-embed-wrap iframe {
+    height: 280px;
+  }
+
+  /* Skeleton grids */
+  .skeleton-loader--couple,
+  .skeleton-loader--events {
+    grid-template-columns: 1fr;
+  }
+
+  /* Lightbox nav on mobile */
+  .lightbox__nav {
+    width : 2.25rem;
+    height: 2.25rem;
+  }
+
+  .lightbox__img {
+    max-width : 92vw;
+    max-height: 75vh;
+  }
+}
+
+/* ---- Tablet: 768px – 1023px (2 columns) ---- */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root {
+    --section-padding-y: var(--space-16);
+    --container-px     : var(--space-6);
+  }
+
+  /* Couple: 2 columns */
+  .couple-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Events: 2 columns */
+  .events-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Gallery: 2 columns masonry */
+  .gallery-masonry {
+    columns  : 2;
+    column-gap: var(--space-4);
+  }
+
+  .skeleton-loader--gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Envelope: 2 columns (already default) */
+  .envelope-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Cover ornaments visible on tablet */
+  .cover-ornament {
+    display: block;
+  }
+}
+
+/* ---- Desktop: ≥ 1024px (3 columns) ---- */
+
+@media (min-width: 1024px) {
+  :root {
+    --section-padding-y: var(--space-20);
+    --container-px     : var(--space-8);
+  }
+
+  /* Couple: 2 columns centered (intentional — 3 would be odd for 2 people) */
+  .couple-grid {
+    grid-template-columns: repeat(2, 400px);
+    justify-content      : center;
+  }
+
+  /* Events: 2 columns centered (only 2 events) */
+  .events-grid {
+    grid-template-columns: repeat(2, 440px);
+    justify-content      : center;
+  }
+
+  /* Gallery: 3 columns masonry */
+  .gallery-masonry {
+    columns   : 3;
+    column-gap: var(--space-5);
+  }
+
+  .skeleton-loader--gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Envelope: up to 3 columns when there are 3+ entries */
+  .envelope-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  /* Timeline widens */
+  .timeline {
+    max-width : 800px;
+  }
+
+  /* Maps taller on desktop */
+  .maps-embed-wrap iframe {
+    height: 480px;
+  }
+}
+
+/* ---- Large desktop: ≥ 1280px ---- */
+
+@media (min-width: 1280px) {
+  :root {
+    --container-max: 1200px;
+  }
+}
+
+/* ============================================================
+   21. Print Styles
+   ============================================================ */
+
+@media print {
+  #tsparticles,
+  .music-toggle,
+  .lightbox,
+  .cover-actions,
+  .footer-share,
+  .maps-actions,
+  .event-card__actions,
+  .form-actions {
+    display: none !important;
+  }
+
+  .section--cover {
+    min-height: auto;
+    padding   : var(--space-8);
+  }
+
+  body {
+    background-color: #fff;
+    color           : #000;
+  }
+}
+
+/* ============================================================
+   22. Accessibility — Focus visible ring
+   ============================================================ */
+
+:focus-visible {
+  outline       : 3px solid var(--color-emas);
+  outline-offset: 3px;
+  border-radius : var(--radius-sm);
+}
+
+/* Remove default focus ring for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* High-contrast mode support */
+@media (forced-colors: active) {
+  .section-divider,
+  .bismillah-divider,
+  .timeline::before {
+    background: ButtonText;
+  }
+
+  .counter {
+    border: 1px solid ButtonText;
+  }
+}

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelola Acara - Admin Wedding</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    <!-- Header -->
+    <header class="admin-header">
+      <div style="display: flex; align-items: center;">
+        <button id="sidebar-toggle-btn" class="admin-nav-toggle" aria-label="Toggle Sidebar">
+          <i data-feather="menu"></i>
+        </button>
+        <span class="admin-header__brand">Wedding Admin</span>
+      </div>
+      <div class="admin-header__actions">
+        <a href="../index.html" target="_blank" class="btn btn--outline btn--sm" style="color: var(--color-white); border-color: var(--color-gold);">
+          <i data-feather="external-link"></i> Pratinjau
+        </a>
+        <button id="logout-btn" class="btn btn--danger btn--sm">
+          <i data-feather="log-out"></i> Keluar
+        </button>
+      </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <nav class="admin-nav">
+        <a href="index.html" class="admin-nav__item"><i data-feather="grid"></i> Dashboard</a>
+        <a href="couple.html" class="admin-nav__item"><i data-feather="users"></i> Mempelai</a>
+        <a href="events.html" class="admin-nav__item"><i data-feather="calendar"></i> Acara</a>
+        <a href="gallery.html" class="admin-nav__item"><i data-feather="image"></i> Galeri Foto</a>
+        <a href="love-story.html" class="admin-nav__item"><i data-feather="heart"></i> Love Story</a>
+        <a href="envelope.html" class="admin-nav__item"><i data-feather="credit-card"></i> Amplop Digital</a>
+        <a href="rsvp.html" class="admin-nav__item"><i data-feather="mail"></i> RSVP Tamu</a>
+        <a href="guestbook.html" class="admin-nav__item"><i data-feather="message-square"></i> Buku Tamu</a>
+        <a href="music.html" class="admin-nav__item"><i data-feather="music"></i> Musik Latar</a>
+        <a href="settings.html" class="admin-nav__item"><i data-feather="settings"></i> Pengaturan</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <div class="admin-page-header">
+        <h2 class="admin-page-title">Kelola Acara Pernikahan</h2>
+      </div>
+
+      <form id="events-form">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+          <!-- Akad Nikah -->
+          <div class="card">
+            <h3 class="card-title" style="color: var(--color-green-dark); border-bottom: 2px solid var(--color-green-light); padding-bottom: 5px;">
+              Akad Nikah
+            </h3>
+            <div class="form-group">
+              <label for="akad-date" class="form-label">Tanggal Acara</label>
+              <input type="date" id="akad-date" class="form-control" required>
+            </div>
+            <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <div>
+                <label for="akad-start-time" class="form-label">Jam Mulai</label>
+                <input type="time" id="akad-start-time" class="form-control" required>
+              </div>
+              <div>
+                <label for="akad-end-time" class="form-label">Jam Selesai</label>
+                <input type="time" id="akad-end-time" class="form-control" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="akad-venue" class="form-label">Nama Tempat / Gedung</label>
+              <input type="text" id="akad-venue" class="form-control" placeholder="Masjid Al-Barkah / Rumah mempelai" required maxlength="200">
+            </div>
+            <div class="form-group">
+              <label for="akad-address" class="form-label">Alamat Lengkap</label>
+              <textarea id="akad-address" class="form-control" rows="3" placeholder="Alamat lengkap tempat pelaksanaan akad" required maxlength="500"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="akad-maps-url" class="form-label">URL Google Maps (Tombol Navigasi)</label>
+              <input type="url" id="akad-maps-url" class="form-control" placeholder="https://maps.app.goo.gl/...">
+            </div>
+            <div class="form-group">
+              <label for="akad-maps-embed" class="form-label">URL Embed IFrame Google Maps (Peta)</label>
+              <input type="url" id="akad-maps-embed" class="form-control" placeholder="https://www.google.com/maps/embed?...">
+            </div>
+          </div>
+
+          <!-- Resepsi Pernikahan -->
+          <div class="card">
+            <h3 class="card-title" style="color: var(--color-green-dark); border-bottom: 2px solid var(--color-green-light); padding-bottom: 5px;">
+              Resepsi
+            </h3>
+            <div class="form-group">
+              <label for="resepsi-date" class="form-label">Tanggal Acara</label>
+              <input type="date" id="resepsi-date" class="form-control" required>
+            </div>
+            <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <div>
+                <label for="resepsi-start-time" class="form-label">Jam Mulai</label>
+                <input type="time" id="resepsi-start-time" class="form-control" required>
+              </div>
+              <div>
+                <label for="resepsi-end-time" class="form-label">Jam Selesai</label>
+                <input type="time" id="resepsi-end-time" class="form-control" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="resepsi-venue" class="form-label">Nama Tempat / Gedung</label>
+              <input type="text" id="resepsi-venue" class="form-control" placeholder="Gedung Serbaguna / Grand Ballroom" required maxlength="200">
+            </div>
+            <div class="form-group">
+              <label for="resepsi-address" class="form-label">Alamat Lengkap</label>
+              <textarea id="resepsi-address" class="form-control" rows="3" placeholder="Alamat lengkap tempat pelaksanaan resepsi" required maxlength="500"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="resepsi-maps-url" class="form-label">URL Google Maps (Tombol Navigasi)</label>
+              <input type="url" id="resepsi-maps-url" class="form-control" placeholder="https://maps.app.goo.gl/...">
+            </div>
+            <div class="form-group">
+              <label for="resepsi-maps-embed" class="form-label">URL Embed IFrame Google Maps (Peta)</label>
+              <input type="url" id="resepsi-maps-embed" class="form-control" placeholder="https://www.google.com/maps/embed?...">
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: right; margin-top: 10px; margin-bottom: 30px;">
+          <button type="submit" class="btn btn--primary btn--lg" style="padding: 12px 24px;">
+            <i data-feather="save"></i> Simpan Detail Acara
+          </button>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <script src="../assets/js/admin.js"></script>
+</body>
+</html>

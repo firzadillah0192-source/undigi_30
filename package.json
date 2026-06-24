@@ -1,0 +1,17 @@
+{
+  "name": "digital-wedding-invitation",
+  "version": "1.0.0",
+  "description": "Website undangan digital pernikahan",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest --run --coverage"
+  },
+  "devDependencies": {
+    "@fast-check/vitest": "^0.1.5",
+    "jsdom": "^25.0.1",
+    "vitest": "^2.1.8"
+  }
+}

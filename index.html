@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Undangan Pernikahan</title>
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="" id="og-url" />
+  <meta property="og:title"       content="Undangan Pernikahan" id="og-title" />
+  <meta property="og:description" content="Kami mengundang Anda untuk menyaksikan hari bahagia kami." id="og-description" />
+  <meta property="og:image"       content="" id="og-image" />
+  <meta name="twitter:card"       content="summary_large_image" />
+  <meta name="twitter:title"      content="Undangan Pernikahan" />
+  <meta name="twitter:description" content="Kami mengundang Anda untuk menyaksikan hari bahagia kami." />
+  <meta name="description"        content="Undangan pernikahan digital. Kami mengundang Anda untuk menyaksikan hari bahagia kami." />
+
+  <!-- Google Fonts: Playfair Display + Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Feather Icons -->
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.29.2/dist/feather.min.js"></script>
+
+  <!-- GSAP 3 + ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <!-- tsParticles -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+
+  <!-- App Styles -->
+  <link rel="stylesheet" href="assets/css/guest.css" />
+  <link rel="stylesheet" href="assets/css/animations.css" />
+</head>
+<body>
+
+  <!-- tsParticles Container -->
+  <div id="tsparticles" aria-hidden="true"></div>
+
+  <!-- Music Control (fixed, bottom-right) -->
+  <button id="music-toggle" class="music-toggle" aria-label="Putar / Jeda Musik Latar" disabled>
+    <i data-feather="music" aria-hidden="true"></i>
+  </button>
+
+  <!-- ===================================================
+       SECTION 1 — COVER
+  =================================================== -->
+  <section id="cover" class="section section--cover" aria-label="Cover Undangan">
+    <!-- Envelope opening animation stage -->
+    <div class="envelope-stage" role="img" aria-label="Animasi amplop">
+      <div class="envelope">
+        <div class="envelope-lid"></div>
+        <div class="envelope-body">
+          <div class="invitation-card">
+            <span class="invitation-card__bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</span>
+          </div>
+        </div>
+      </div>
+      <div class="flower-petals" aria-hidden="true">
+        <span class="petal petal--1"></span>
+        <span class="petal petal--2"></span>
+        <span class="petal petal--3"></span>
+        <span class="petal petal--4"></span>
+        <span class="petal petal--5"></span>
+        <span class="petal petal--6"></span>
+      </div>
+    </div>
+
+    <!-- Cover content (shown after animation) -->
+    <div class="cover-content">
+      <div class="cover-ornament cover-ornament--left" aria-hidden="true">
+        <img src="assets/images/ornaments/ornament-left.svg" alt="" width="80" height="200" />
+      </div>
+      <div class="cover-ornament cover-ornament--right" aria-hidden="true">
+        <img src="assets/images/ornaments/ornament-right.svg" alt="" width="80" height="200" />
+      </div>
+
+      <p class="cover-greeting">Kepada Yth.</p>
+      <span class="cover-guest-name" id="guest-name-display">Tamu Undangan</span>
+
+      <div class="cover-divider" aria-hidden="true">── ✦ ──</div>
+
+      <p class="cover-label">THE WEDDING OF</p>
+      <h1 class="cover-couple-names" id="cover-couple-names" data-animate>
+        <span class="cover-groom-name">Ahmad</span>
+        <span class="cover-ampersand">&amp;</span>
+        <span class="cover-bride-name">Siti</span>
+      </h1>
+
+      <p class="cover-date" id="cover-date" data-animate>15 · Agustus · 2025</p>
+
+      <div class="cover-actions" data-animate>
+        <button id="btn-open-invitation" class="btn btn--primary btn--open">
+          <i data-feather="mail" aria-hidden="true"></i>
+          Buka Undangan
+        </button>
+        <button id="btn-skip-animation" class="btn btn--ghost btn--skip">
+          Lewati
+        </button>
+      </div>
+    </div>
+
+    <!-- Skeleton loader -->
+    <div class="skeleton-loader skeleton-loader--cover" aria-hidden="true">
+      <div class="skeleton skeleton--text skeleton--short"></div>
+      <div class="skeleton skeleton--title"></div>
+      <div class="skeleton skeleton--text"></div>
+      <div class="skeleton skeleton--button"></div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       SECTION 2 — BISMILLAH / PEMBUKA
+  =================================================== -->
+  <section id="bismillah" class="section section--bismillah" aria-label="Pembuka">
+    <div class="section-inner">
+      <div class="skeleton-loader skeleton-loader--bismillah" aria-hidden="true">
+        <div class="skeleton skeleton--title"></div>
+        <div class="skeleton skeleton--text"></div>
+        <div class="skeleton skeleton--text skeleton--short"></div>
+      </div>
+
+      <div class="bismillah-content">
+        <p class="bismillah-text" data-animate id="bismillah-text">
+          بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
+        </p>
+        <div class="bismillah-divider" aria-hidden="true"></div>
+        <div class="bismillah-body" data-animate>
+          <p class="bismillah-opening" id="bismillah-opening">
+            Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan resepsi pernikahan putra-putri kami. Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       SECTION 3 — PROFIL MEMPELAI
+  =================================================== -->
+  <section id="couple" class="section section--couple" aria-label="Profil Mempelai">
+    <div class="section-inner">
+      <div class="section-header" data-animate>
+        <h2 class="section-title">Mempelai</h2>
+        <div class="section-divider" aria-hidden="true"></div>
+      </div>
+
+      <div class="skeleton-loader skeleton-loader--couple" aria-hidden="true">
+        <div class="skeleton skeleton--card"></div>
+        <div class="skeleton skeleton--card"></div>
+      </div>
+
+      <div class="couple-grid">
+        <!-- Mempelai Pria -->
+        <article class="couple-card couple-card--groom" data-animate id="groom-card">
+          <div class="couple-card__photo-wrap">
+            <img src="assets/images/ornaments/placeholder-person.svg"
+                 alt="Foto mempelai pria"
+                 class="couple-card__photo"
+                 id="groom-photo"
+                 width="220" height="220"
+                 loading="lazy" />
+          </div>
+          <div class="couple-card__info">
+            <p class="couple-card__role">Mempelai Pria</p>
+            <h3 class="couple-card__name" id="groom-name">Ahmad Fauzan</h3>
+            <p class="couple-card__nickname" id="groom-nickname">Ahmad</p>
+            <p class="couple-card__parents">
+              Putra dari <strong id="groom-father">Bpk. Abdullah</strong>
+              &amp; <strong id="groom-mother">Ibu Fatimah</strong>
+            </p>
+          </div>
+        </article>
+
+        <!-- Mempelai Wanita -->
+        <article class="couple-card couple-card--bride" data-animate id="bride-card">
+          <div class="couple-card__photo-wrap">
+            <img src="assets/images/ornaments/placeholder-person.svg"
+                 alt="Foto mempelai wanita"
+                 class="couple-card__photo"
+                 id="bride-photo"
+                 width="220" height="220"
+                 loading="lazy" />
+          </div>
+          <div class="couple-card__info">
+            <p class="couple-card__role">Mempelai Wanita</p>
+            <h3 class="couple-card__name" id="bride-name">Siti Nurhaliza</h3>
+            <p class="couple-card__nickname" id="bride-nickname">Siti</p>
+            <p class="couple-card__parents">
+              Putri dari <strong id="bride-father">Bpk. Hasan</strong>
+              &amp; <strong id="bride-mother">Ibu Aisyah</strong>
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       SECTION 4 — DETAIL ACARA
+  =================================================== -->
+  <section id="events" class="section section--events" aria-label="Detail Acara">
+    <div class="section-inner">
+      <div class="section-header" data-animate>
+        <h2 class="section-title">Detail Acara</h2>
+        <div class="section-divider" aria-hidden="true"></div>
+      </div>
+
+      <div class="skeleton-loader skeleton-loader--events" aria-hidden="true">
+        <div class="skeleton skeleton--card"></div>
+        <div class="skeleton skeleton--card"></div>
+      </div>
+
+      <div class="events-grid">
+        <!-- Akad Nikah -->
+        <article class="event-card event-card--akad" data-animate id="akad-card">
+          <div class="event-card__header">
+            <i data-feather="heart" aria-hidden="true" class="event-card__icon"></i>
+            <h3 class="event-card__type">A K A D</h3>
+          </div>
+          <div class="event-card__body">
+            <dl class="event-card__details">
+              <dt class="sr-only">Tanggal</dt>
+              <dd class="event-card__date" id="akad-date">
+                <i data-feather="calendar" aria-hidden="true"></i>
+                <span>Segera diumumkan</span>
+              </dd>
+              <dt class="sr-only">Waktu</dt>
+              <dd class="event-card__time" id="akad-time">
+                <i data-feather="clock" aria-hidden="true"></i>
+                <span>Segera diumumkan</span>
+              </dd>
+              <dt class="sr-only">Tempat</dt>
+              <dd class="event-card__venue" id="akad-venue">
+                <i data-feather="map-pin" aria-hidden="true"></i>
+                <span>Segera diumumkan</span>
+              </dd>
+              <dt class="sr-only">Alamat</dt>
+              <dd class="event-card__address" id="akad-address">Segera diumumkan</dd>
+            </dl>
+          </div>
+          <div class="event-card__actions">
+            <button class="btn btn--outline btn--calendar" data-event="akad" aria-label="Simpan Akad ke Kalender">
+              <i data-feather="calendar" aria-hidden="true"></i>
+              Simpan ke Kalender
+            </button>
+          </div>
+        </article>
+
+        <!-- Resepsi -->
+        <article class="event-card event-card--resepsi" data-animate id="resepsi-card">
+          <div class="event-card__header">
+            <i data-feather="users" aria-hidden="true" class="event-card__icon"></i>
+            <h3 class="event-card__type">R E S E P S I</h3>
+          </div>
+          <div class="event-card__body">
+            <dl class="event-card__details">
+              <dt class="sr-only">Tanggal</dt>
+              <dd class="event-card__date" id="resepsi-date">
+                <i data-feather="calendar" aria-hidden="true"></i>
+                <span>Segera diumumkan</span>
+              </dd>
+              <dt class="sr-only">Waktu</dt>
+              <dd class="event-card__time" id="resepsi-time">
+                <i data-feather="clock" aria-hidden="true"></i>
+                <span>Segera diumumkan</span>
+              </dd>
+              <dt class="sr-only">Tempat</dt>
+              <dd class="event-card__venue" id="resepsi-venue">
+                <i data-feather="map-pin" aria-hidden="true"></i>
+                <span>Segera diumumkan</span>
+              </dd>
+              <dt class="sr-only">Alamat</dt>
+              <dd class="event-card__address" id="resepsi-address">Segera diumumkan</dd>
+            </dl>
+          </div>
+          <div class="event-card__actions">
+            <button class="btn btn--outline btn--calendar" data-event="resepsi" aria-label="Simpan Resepsi ke Kalender">
+              <i data-feather="calendar" aria-hidden="true"></i>
+              Simpan ke Kalender
+            </button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       SECTION 5 — COUNTDOWN TIMER
+  =================================================== -->
+  <section id="countdown" class="section section--countdown" aria-label="Hitung Mundur">
+    <div class="section-inner">
+      <div class="section-header" data-animate>
+        <h2 class="section-title">Menuju Hari Bahagia</h2>
+        <div class="section-divider" aria-hidden="true"></div>
+      </div>
+
+      <div class="skeleton-loader skeleton-loader--countdown" aria-hidden="true">
+        <div class="skeleton skeleton--countdown-block"></div>
+        <div class="skeleton skeleton--countdown-block"></div>
+        <div class="skeleton skeleton--countdown-block"></div>
+        <div class="skeleton skeleton--countdown-block"></div>
+      </div>
+
+      <div class="countdown-wrap" data-animate>
+        <div class="countdown-grid" id="countdown-grid" role="timer" aria-live="polite" aria-label="Hitung mundur pernikahan">
+          <div class="counter" id="counter-days">
+            <span class="counter__value" aria-label="hari">0</span>
+            <span class="counter__label">Hari</span>
+          </div>
+          <div class="counter counter--separator" aria-hidden="true">:</div>
+          <div class="counter" id="counter-hours">
+            <span class="counter__value" aria-label="jam">0</span>
+            <span class="counter__label">Jam</span>
+          </div>
+          <div class="counter counter--separator" aria-hidden="true">:</div>
+          <div class="counter" id="counter-minutes">
+            <span class="counter__value" aria-label="menit">0</span>
+            <span class="counter__label">Menit</span>
+          </div>
+          <div class="counter counter--separator" aria-hidden="true">:</div>
+          <div class="counter" id="counter-seconds">
+            <span class="counter__value" aria-label="detik">0</span>
+            <span class="counter__label">Detik</span>
+          </div>
+        </div>
+        <p class="countdown-elapsed" id="countdown-elapsed" hidden>
+          Alhamdulillah, Acara Telah Berlangsung
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       SECTION 6 — GALERI FOTO
+  =================================================== -->
+  <section id="gallery" class="section section--gallery" aria-label="Galeri Foto">
+    <div class="section-inner">
+      <div class="section-header" data-animate>
+        <h2 class="section-title">Galeri</h2>
+        <div class="section-divider" aria-hidden="true"></div>
+      </div>
+
+      <div class="skeleton-loader skeleton-loader--gallery" aria-hidden="true">
+        <div class="skeleton skeleton--gallery-item"></div>
+        <div class="skeleton skeleton--gallery-item"></div>
+        <div class="skeleton skeleton--gallery-item"></div>
+        <div class="skeleton skeleton--gallery-item"></div>
+        <div class="skeleton skeleton--gallery-item"></div>
+        <div class="skeleton skeleton--gallery-item"></div>
+      </div>
+
+      <div class="gallery-masonry" id="gallery-grid" data-animate>
+        <!-- Populated dynamically by guest.js / lightbox.js -->
+        <p class="gallery-empty" id="gallery-empty" hidden>Belum ada foto.</p>
+      </div>
+    </div>
+
+    <!-- Lightbox overlay -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Lightbox galeri" hidden>
+      <div class="lightbox__overlay" id="lightbox-overlay" tabindex="0"></div>
+      <div class="lightbox__content">
+        <button class="lightbox__close" id="lightbox-close" aria-label="Tutup lightbox">
+          <i data-feather="x" aria-hidden="true"></i>
+        </button>
+        <button class="lightbox__nav lightbox__nav--prev" id="lightbox-prev" aria-label="Foto sebelumnya">
+          <i data-feather="chevron-left" aria-hidden="true"></i>
+        </button>
+        <img src="" alt="" class="lightbox__img" id="lightbox-img" />
+        <button class="lightbox__nav lightbox__nav--next" id="lightbox-next" aria-label="Foto berikutnya">
+          <i data-feather="chevron-right" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       SECTION 7 — LOVE STORY / TIMELINE
+  =================================================== -->
+  <section id="love-story" class="section section--love-story" aria-label="Kisah Cinta">
+    <div class="section-inner">
+      <div class="section-header" data-animate>
+        <h2 class="section-title">Kisah Kita</h2>
+        <div class="section-divider" aria-hidden="true"></div>
+      </div>
+
+      <div class="skeleton-loader skeleton-loader--timeline" aria-hidden="true">
+        <div class="skeleton skeleton--timeline-item"></div>
+        <div class="skeleton skeleton--timeline-item"></div>
+        <div class="skeleton skeleton--timeline-item"></div>
+      </div>
+
+      <ol class="timeline" id="timeline-container" reversed>
+        <!-- Example timeline items — replaced dynamically by guest.js -->
+        <li class="timeline-item" data-animate>
+          <div class="timeline-item__dot" aria-hidden="true"></div>
+          <div class="timeline-item__card">
+            <time class="timeline-item__date" datetime="2020-01-01">Januari 2020</time>
+            <h3 class="timeline-item__title">Pertama Bertemu</h3>
+            <p class="timeline-item__desc">Kami bertemu untuk pertama kali di sebuah acara yang tak terduga.</p>
+          </div>
+        </li>
+        <li class="timeline-item" data-animate>
+          <div class="timeline-item__dot" aria-hidden="true"></div>
+          <div class="timeline-item__card">
+            <time class="timeline-item__date" datetime="2022-06-01">Juni 2022</time>
+            <h3 class="timeline-item__title">Lamaran</h3>
+            <p class="timeline-item__desc">Momen yang kami nantikan — langkah menuju pernikahan.</p>
+          </div>
+        </li>
+        <li class="timeline-item" data-animate>
+          <div class="timeline-item__dot" aria-hidden="true"></div>
+          <div class="timeline-item__card">
+            <time class="timeline-item__date" datetime="2025-08-15">Agustus 2025</time>
+            <h3 class="timeline-item__title">Pernikahan</h3>
+            <p class="timeline-item__desc">Hari yang paling bahagia dalam hidup kami.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       SECTION 8 — PETA LOKASI
+  =================================================== -->
+  <section id="maps" class="section section--maps" aria-label="Peta Lokasi">
+    <div class="section-inner">
+      <div class="section-header" data-animate>
+        <h2 class="section-title">Lokasi Acara</h2>
+        <div class="section-divider" aria-hidden="true"></div>
+      </div>
+
+      <div class="skeleton-loader skeleton-loader--maps" aria-hidden="true">
+        <div class="skeleton skeleton--map"></div>
+      </div>
+
+      <div class="maps-container" data-animate>
+        <div class="maps-embed-wrap" id="maps-embed-wrap">
+          <!-- Google Maps iframe injected by guest.js -->
+          <iframe
+            id="maps-iframe"
+            src=""
+            width="100%"
+            height="400"
+            style="border:0;"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Peta lokasi acara pernikahan"
+            aria-label="Peta lokasi acara"
+          ></iframe>
+          <!-- Fallback text if Maps fails to load -->
+          <address class="maps-fallback" id="maps-fallback" hidden>
+            <i data-feather="map-pin" aria-hidden="true"></i>
+            <span id="maps-fallback-address">Alamat belum tersedia.</span>
+          </address>
+        </div>
+        <div class="maps-actions">
+          <a href="#" id="btn-open-maps" class="btn btn--primary" target="_blank" rel="noopener noreferrer" aria-label="Buka di Google Maps">
+            <i data-feather="navigation" aria-hidden="true"></i>
+            Buka di Google Maps
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       SECTION 9 — RSVP / KONFIRMASI KEHADIRAN
+  =================================================== -->
+  <section id="rsvp" class="section section--rsvp" aria-label="RSVP Konfirmasi Kehadiran">
+    <div class="section-inner">
+      <div class="section-header" data-animate>
+        <h2 class="section-title">Konfirmasi Kehadiran</h2>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p class="section-subtitle" data-animate>Mohon konfirmasi kehadiran Anda agar kami dapat mempersiapkan segalanya dengan baik.</p>
+      </div>
+
+      <div class="skeleton-loader skeleton-loader--rsvp" aria-hidden="true">
+        <div class="skeleton skeleton--input"></div>
+        <div class="skeleton skeleton--input"></div>
+        <div class="skeleton skeleton--input skeleton--short"></div>
+        <div class="skeleton skeleton--button"></div>
+      </div>
+
+      <div class="rsvp-wrap" data-animate>
+        <form id="rsvp-form" class="form rsvp-form" novalidate aria-label="Form RSVP">
+          <div class="form-group">
+            <label class="form-label" for="rsvp-guest-name">
+              Nama Lengkap <span class="form-required" aria-hidden="true">*</span>
+            </label>
+            <input
+              type="text"
+              id="rsvp-guest-name"
+              name="guest_name"
+              class="form-input"
+              placeholder="Masukkan nama Anda"
+              maxlength="100"
+              autocomplete="name"
+              required
+              aria-required="true"
+              aria-describedby="rsvp-guest-name-error"
+            />
+            <span class="form-error" id="rsvp-guest-name-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="rsvp-attendance">
+              Konfirmasi Kehadiran <span class="form-required" aria-hidden="true">*</span>
+            </label>
+            <select
+              id="rsvp-attendance"
+              name="attendance"
+              class="form-select"
+              required
+              aria-required="true"
+              aria-describedby="rsvp-attendance-error"
+            >
+              <option value="" disabled selected>-- Pilih Konfirmasi --</option>
+              <option value="hadir">Insya Allah Hadir</option>
+              <option value="tidak_hadir">Tidak Dapat Hadir</option>
+            </select>
+            <span class="form-error" id="rsvp-attendance-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group" id="rsvp-guest-count-group">
+            <label class="form-label" for="rsvp-guest-count">
+              Jumlah Tamu yang Hadir <span class="form-required" aria-hidden="true">*</span>
+            </label>
+            <input
+              type="number"
+              id="rsvp-guest-count"
+              name="guest_count"
+              class="form-input"
+              value="1"
+              min="1"
+              max="10"
+              required
+              aria-required="true"
+              aria-describedby="rsvp-guest-count-error"
+            />
+            <span class="form-error" id="rsvp-guest-count-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="rsvp-phone">
+              Nomor Telepon <span class="form-optional">(opsional)</span>
+            </label>
+            <input
+              type="tel"
+              id="rsvp-phone"
+              name="phone"
+              class="form-input"
+              placeholder="Contoh: 0812xxxxxxxx"
+              maxlength="20"
+              autocomplete="tel"
+              aria-describedby="rsvp-phone-hint"
+            />
+            <span class="form-hint" id="rsvp-phone-hint">Nomor telepon tidak wajib diisi.</span>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" id="rsvp-submit" class="btn btn--primary btn--full">
+              <i data-feather="send" aria-hidden="true"></i>
+              Kirim Konfirmasi
+            </button>
+          </div>
+
+          <div class="form-feedback" id="rsvp-feedback" role="alert" aria-live="polite" hidden></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       SECTION 10 — BUKU TAMU / UCAPAN
+  =================================================== -->
+  <section id="guestbook" class="section section--guestbook" aria-label="Buku Tamu">
+    <div class="section-inner">
+      <div class="section-header" data-animate>
+        <h2 class="section-title">Ucapan &amp; Doa</h2>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p class="section-subtitle" data-animate>Tuliskan ucapan dan doa terbaik Anda untuk kedua mempelai.</p>
+      </div>
+
+      <div class="guestbook-wrap">
+        <!-- Form ucapan -->
+        <div class="guestbook-form-wrap" data-animate>
+          <form id="guestbook-form" class="form guestbook-form" novalidate aria-label="Form ucapan buku tamu">
+            <div class="form-group">
+              <label class="form-label" for="gb-sender-name">
+                Nama <span class="form-required" aria-hidden="true">*</span>
+              </label>
+              <input
+                type="text"
+                id="gb-sender-name"
+                name="sender_name"
+                class="form-input"
+                placeholder="Nama Anda"
+                maxlength="100"
+                autocomplete="name"
+                required
+                aria-required="true"
+                aria-describedby="gb-sender-name-error"
+              />
+              <span class="form-error" id="gb-sender-name-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="gb-message">
+                Pesan <span class="form-required" aria-hidden="true">*</span>
+              </label>
+              <textarea
+                id="gb-message"
+                name="message"
+                class="form-textarea"
+                placeholder="Tuliskan ucapan dan doa Anda..."
+                maxlength="500"
+                rows="4"
+                required
+                aria-required="true"
+                aria-describedby="gb-message-error gb-message-count"
+              ></textarea>
+              <div class="form-meta">
+                <span class="form-error" id="gb-message-error" role="alert" aria-live="polite"></span>
+                <span class="form-char-count" id="gb-message-count" aria-live="polite">0 / 500</span>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" id="guestbook-submit" class="btn btn--primary btn--full">
+                <i data-feather="message-circle" aria-hidden="true"></i>
+                Kirim Ucapan
+              </button>
+            </div>
+
+            <div class="form-feedback" id="guestbook-feedback" role="alert" aria-live="polite" hidden></div>
+          </form>
+        </div>
+
+        <!-- Daftar ucapan -->
+        <div class="skeleton-loader skeleton-loader--guestbook" aria-hidden="true">
+          <div class="skeleton skeleton--guestbook-item"></div>
+          <div class="skeleton skeleton--guestbook-item"></div>
+          <div class="skeleton skeleton--guestbook-item"></div>
+        </div>
+
+        <div class="guestbook-list" id="guestbook-list" aria-label="Daftar ucapan tamu" aria-live="polite">
+          <!-- Populated dynamically by guestbook.js -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       SECTION 11 — AMPLOP DIGITAL
+  =================================================== -->
+  <section id="envelope" class="section section--envelope" aria-label="Amplop Digital">
+    <div class="section-inner">
+      <div class="section-header" data-animate>
+        <h2 class="section-title">Amplop Digital</h2>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p class="section-subtitle" data-animate>Bagi Anda yang ingin memberikan hadiah, kami menyediakan pilihan berikut.</p>
+      </div>
+
+      <div class="skeleton-loader skeleton-loader--envelope" aria-hidden="true">
+        <div class="skeleton skeleton--card"></div>
+        <div class="skeleton skeleton--card"></div>
+      </div>
+
+      <div class="envelope-grid" id="envelope-grid" data-animate>
+        <!-- Populated dynamically by guest.js -->
+        <p class="envelope-empty" id="envelope-empty" hidden>Belum ada informasi rekening.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       SECTION 12 — FOOTER / SHARE
+  =================================================== -->
+  <footer id="footer" class="section section--footer" aria-label="Footer">
+    <div class="section-inner">
+      <div class="footer-content" data-animate>
+        <div class="footer-ornament" aria-hidden="true">
+          <img src="assets/images/ornaments/ornament-divider.svg" alt="" width="200" height="40" />
+        </div>
+
+        <p class="footer-hashtag" id="footer-hashtag">#WeddingDay</p>
+
+        <p class="footer-message">
+          Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.
+        </p>
+
+        <div class="footer-share" data-animate>
+          <p class="footer-share__label">Bagikan Undangan</p>
+          <div class="footer-share__actions">
+            <button id="btn-share-whatsapp" class="btn btn--whatsapp" aria-label="Bagikan via WhatsApp">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              WhatsApp
+            </button>
+            <button id="btn-copy-link" class="btn btn--outline" aria-label="Salin tautan undangan">
+              <i data-feather="link" aria-hidden="true"></i>
+              Salin Tautan
+            </button>
+          </div>
+          <p class="footer-share__feedback" id="copy-link-feedback" role="status" aria-live="polite" hidden>
+            Tersalin! ✓
+          </p>
+        </div>
+
+        <div class="footer-couple-names" data-animate>
+          <p>Dengan Cinta,</p>
+          <p class="footer-names" id="footer-couple-names">Ahmad &amp; Siti</p>
+        </div>
+
+        <p class="footer-credit">
+          Made with <i data-feather="heart" aria-hidden="true" class="footer-heart-icon"></i> for our special day
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================
+       JAVASCRIPT — loaded at bottom for performance
+  =================================================== -->
+  <script src="assets/js/animations.js" type="module"></script>
+  <script src="assets/js/particles.js" type="module"></script>
+  <script src="assets/js/countdown.js" type="module"></script>
+  <script src="assets/js/rsvp.js" type="module"></script>
+  <script src="assets/js/guestbook.js" type="module"></script>
+  <script src="assets/js/lightbox.js" type="module"></script>
+  <script src="assets/js/music.js" type="module"></script>
+  <script src="assets/js/guest.js" type="module"></script>
+
+  <script>
+    // Initialise Feather Icons after DOM is ready
+    document.addEventListener('DOMContentLoaded', function () {
+      if (typeof feather !== 'undefined') {
+        feather.replace({ 'aria-hidden': 'true' });
+      }
+    });
+  </script>
+
+</body>
+</html>

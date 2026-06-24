@@ -1,0 +1,28 @@
+# Dependency directories
+node_modules/
+vendor/
+
+# Local databases
+data/wedding.db
+data/wedding.db-journal
+data/wedding.db-wal
+data/wedding.db-shm
+
+# User uploads (ignore contents but keep folder structures via .gitkeep)
+uploads/couple/*
+!uploads/couple/.gitkeep
+uploads/gallery/*
+!uploads/gallery/.gitkeep
+uploads/love-story/*
+!uploads/love-story/.gitkeep
+uploads/music/*
+!uploads/music/.gitkeep
+
+# IDEs and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Dev server local
+dev-server.js

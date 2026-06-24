@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelola Love Story - Admin Wedding</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    <!-- Header -->
+    <header class="admin-header">
+      <div style="display: flex; align-items: center;">
+        <button id="sidebar-toggle-btn" class="admin-nav-toggle" aria-label="Toggle Sidebar">
+          <i data-feather="menu"></i>
+        </button>
+        <span class="admin-header__brand">Wedding Admin</span>
+      </div>
+      <div class="admin-header__actions">
+        <a href="../index.html" target="_blank" class="btn btn--outline btn--sm" style="color: var(--color-white); border-color: var(--color-gold);">
+          <i data-feather="external-link"></i> Pratinjau
+        </a>
+        <button id="logout-btn" class="btn btn--danger btn--sm">
+          <i data-feather="log-out"></i> Keluar
+        </button>
+      </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <nav class="admin-nav">
+        <a href="index.html" class="admin-nav__item"><i data-feather="grid"></i> Dashboard</a>
+        <a href="couple.html" class="admin-nav__item"><i data-feather="users"></i> Mempelai</a>
+        <a href="events.html" class="admin-nav__item"><i data-feather="calendar"></i> Acara</a>
+        <a href="gallery.html" class="admin-nav__item"><i data-feather="image"></i> Galeri Foto</a>
+        <a href="love-story.html" class="admin-nav__item"><i data-feather="heart"></i> Love Story</a>
+        <a href="envelope.html" class="admin-nav__item"><i data-feather="credit-card"></i> Amplop Digital</a>
+        <a href="rsvp.html" class="admin-nav__item"><i data-feather="mail"></i> RSVP Tamu</a>
+        <a href="guestbook.html" class="admin-nav__item"><i data-feather="message-square"></i> Buku Tamu</a>
+        <a href="music.html" class="admin-nav__item"><i data-feather="music"></i> Musik Latar</a>
+        <a href="settings.html" class="admin-nav__item"><i data-feather="settings"></i> Pengaturan</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <div class="admin-page-header">
+        <h2 class="admin-page-title">Kelola Love Story / Timeline</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 20px; align-items: start;">
+        <!-- Add Item Form -->
+        <div class="card">
+          <h3 class="card-title">Tambah Kisah Baru</h3>
+          <form id="story-form">
+            <div class="form-group">
+              <label for="story-title" class="form-label">Judul Peristiwa</label>
+              <input type="text" id="story-title" class="form-control" placeholder="Pertama Bertemu / Tunangan" required maxlength="100">
+            </div>
+            <div class="form-group">
+              <label for="story-date" class="form-label">Tanggal Peristiwa</label>
+              <input type="date" id="story-date" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="story-desc" class="form-label">Deskripsi Cerita</label>
+              <textarea id="story-desc" class="form-control" rows="4" placeholder="Ceritakan singkat peristiwa indah ini..." maxlength="500"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="story-photo" class="form-label">Foto Pendukung (Opsional)</label>
+              <input type="file" id="story-photo" accept="image/jpeg,image/png,image/webp" class="form-control" style="padding: 5px;">
+              <small style="display: block; color: var(--color-neutral-gray); margin-top: 4px;">JPG, PNG, atau WebP. Maks 5 MB.</small>
+            </div>
+            <div class="form-group">
+              <label for="story-sort-order" class="form-label">Urutan Tampil (Sort Order)</label>
+              <input type="number" id="story-sort-order" class="form-control" value="0" min="0">
+            </div>
+            <button type="submit" class="btn btn--primary" style="width: 100%; margin-top: 10px;">
+              <i data-feather="plus"></i> Tambah Kisah
+            </button>
+          </form>
+        </div>
+
+        <!-- Timeline Items List -->
+        <div class="card">
+          <h3 class="card-title">Perjalanan Cinta Terdaftar</h3>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Judul</th>
+                  <th>Tanggal</th>
+                  <th>Deskripsi</th>
+                  <th>Foto</th>
+                  <th style="width: 80px;">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="story-items-container">
+                <tr>
+                  <td colspan="5" style="text-align: center; color: var(--color-neutral-gray); padding: 30px;">
+                    Memuat daftar timeline...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <script src="../assets/js/admin.js"></script>
+</body>
+</html>
